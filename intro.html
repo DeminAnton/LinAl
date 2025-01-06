@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to your Jupyter Book &#8212; Линейная Алгебра. Конспект.</title>
+    <title>Введение &#8212; Линейная Алгебра. Конспект c питоном.</title>
   
   
   
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -144,8 +144,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Линейная Алгебра. Конспект c питоном. - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="Линейная Алгебра. Конспект c питоном. - Home"/>
   
-    <p class="title logo__title">Линейная Алгебра. Конспект.</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -161,7 +167,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Welcome to your Jupyter Book
+                    Введение
                 </a>
             </li>
         </ul>
@@ -228,7 +234,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/DeminAnton/LinAl" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -245,7 +251,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/DeminAnton/LinAl/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -338,7 +344,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -349,11 +357,23 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to your Jupyter Book</h1>
+    <h1>Введение</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Для кого может быть полезен конспект?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Что включено в эти материалы?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Чего пока не хватает?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Зачем я создаю этот конспект?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Предварительные знания, которые могут быть полезны для понимания материала</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -363,13 +383,61 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-your-jupyter-book">
-<h1>Welcome to your Jupyter Book<a class="headerlink" href="#welcome-to-your-jupyter-book" title="Link to this heading">#</a></h1>
-<p>This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out <a class="reference external" href="https://jupyterbook.org">the Jupyter Book documentation</a> for more information.</p>
-<p>Check out the content pages bundled with this sample book to see more.</p>
+  <section id="id1">
+<h1>Введение<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Добро пожаловать в мой <strong>конспект по линейной алгебре</strong>, основанный на книге Гилберта Странга <em>“Introduction to Linear Algebra”</em>. Этот проект представляет собой разбор основных концепций линейной алгебры, дополненный иллюстрациями, примерами и вычислительными процедурами на Python.</p>
+<p>Моя мотивация к написанию этого конспекта связана с изучением машинного обучения (ML). Так как для меня это не первое знакомство с линейной алгеброй, а скорее повторение ранее изученного материала, я могу сосредоточиться на стиле изложения, в котором большая часть объяснений будет проиллюстрирована при помощи Python-кода. Конспект структурирован в соответствии с последовательностью книги. Каждый раздел вводит новые концепции, подкреплённые примерами на Python и визуализациями. Если использовать конспект как учебное пособие, можно изучать главы по порядку или переходить к темам, которые особенно вас интересуют.</p>
+<hr class="docutils" />
+<section id="id2">
+<h2>Для кого может быть полезен конспект?<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>Конечно, этот конспект не заменяет книгу, а тем более полноценный учебник, но всё же он может быть полезным. Конспект решает следующие задачи:</p>
+<ul class="simple">
+<li><p>Повторение материала;</p></li>
+<li><p>Практическая реализация объектов и операций линейной алгебры на Python;</p></li>
+<li><p>Попутно можно научиться строить иллюстрации при помощи Matplotlib;</p></li>
+<li><p>Освещение связи между линейной алгеброй и другими разделами математики, а также её практическое применение в машинном обучении (ML).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>Что включено в эти материалы?<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Краткое объяснение теории:</strong>
+Конспект следует структуре книги, как минимум, на уровне глав. Основные определения, теоремы и концепции изложены лаконично и, где это возможно, тезисно, особенно в тех случаях, когда доказательства или выводы кажутся очевидными.</p></li>
+<li><p><strong>Вычислительные процедуры на Python:</strong>
+Большинство вычислений я выполняю с помощью Python, чтобы продемонстрировать, как эффективно работать с объектами линейной алгебры с использованием популярных библиотек, таких как:</p>
+<ul class="simple">
+<li><p><strong>NumPy</strong> и <strong>SciPy</strong> — для операций с матрицами, вычисления собственных значений и других численных процедур;</p></li>
+<li><p><strong>Matplotlib</strong> — для визуализации геометрических интерпретаций, таких как преобразования, подпространства и линейные комбинации.</p></li>
+</ul>
+</li>
+<li><p><strong>Иллюстрации:</strong>
+Использование Jupyter Notebook позволяет включать в текст не только статические иллюстрации, но иногда и анимации, которые помогают лучше понять процессы, такие как линейные преобразования, проекции, разложения и так далее. Иллюстрации делают материал более наглядным и интерактивным.</p></li>
+<li><p><strong>Практическая реализация идей:</strong>
+Я делаю акцент на связях между теорией линейной алгебры и её приложениями в других областях математики и программирования. Связь с вычислительными методами и ML демонстрируется в отдельных примерах.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>Чего пока не хватает?<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>Главное, чего не хватает, — задач. Я не могу освоить материал, только прочитав теорию, и всегда ищу максимальное количество задач разного уровня, решение которых позволит разобраться с предметом.</p>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2>Зачем я создаю этот конспект?<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>Я уверен, что понимание линейной алгебры требует не только теоретического изучения, но и активного практического применения. Решая задачи программно и визуализируя результаты, можно глубже понять и почувствовать суть линейной алгебры. Этот конспект — моя попытка сделать изучение линейной алгебры более доступным, интерактивным и практичным.</p>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h2>Предварительные знания, которые могут быть полезны для понимания материала<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>Для успешного освоения материала желательно обладать следующими знаниями:</p>
+<ul class="simple">
+<li><p>Базовый курс программирования и опыт работы с Python;</p></li>
+<li><p>Введение в линейную алгебру, например, в формате видеообзора, такого как <em>“Essence of Linear Algebra”</em> от <strong>3Blue1Brown</strong>;</p></li>
+<li><p>Знание основ математического анализа, поскольку некоторые разделы (явно или неявно) могут использовать концепции из анализа.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Буду рад, если мои записи будут полезны читающим.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
@@ -377,6 +445,7 @@ It does not go in-depth into any particular topic - check out <a class="referenc
 <li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
 </ul>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -424,6 +493,26 @@ It does not go in-depth into any particular topic - check out <a class="referenc
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Для кого может быть полезен конспект?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Что включено в эти материалы?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Чего пока не хватает?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Зачем я создаю этот конспект?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Предварительные знания, которые могут быть полезны для понимания материала</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
