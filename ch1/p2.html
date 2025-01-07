@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -65,6 +65,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch1/p2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Решение линейных уравнений" href="../ch2/main.html" />
+    <link rel="prev" title="Вектор" href="p1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -115,8 +117,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -170,7 +170,15 @@
                 </a>
             </li>
         </ul>
-        
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="main.html">Векторы. Операции с векторами. Матрицы.</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p1.html">Вектор</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Матрицы</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../ch2/main.html">Решение линейных уравнений</a></li>
+</ul>
+
     </div>
 </nav></div>
     </div>
@@ -361,31 +369,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Матрицы</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#x-1-x-2-x-3-x-1-begin-bmatrix-1-1-0-end-bmatrix-x-2-begin-bmatrix-0-1-1-end-bmatrix-x-3-begin-bmatrix-0-0-1-end-bmatrix">Если мы хотим получить вектор, являющийся их линейной комбинацией с коэффициентами <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span>, то можем записать эту комбинацию так:
-$$
-x_1
-\begin{bmatrix}
-1 \
--1 \
-0
-\end{bmatrix}
-+
-x_2
-\begin{bmatrix}
-0 \
-1 \
--1
-\end{bmatrix}
-+
-x_3
-\begin{bmatrix}
-0 \
-0 \
-1
-\end{bmatrix}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Системы линейных уравнений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Зависимость и независимость</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -396,10 +382,11 @@ x_3
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="id1">
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Матрицы<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p>Предположим, у нас есть три вектора:
-$<span class="math notranslate nohighlight">\(
+<p>Предположим, у нас есть три вектора:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \boldsymbol{u} = 
 \begin{bmatrix} 
    1 \\
@@ -420,37 +407,37 @@ $<span class="math notranslate nohighlight">\(
    0 \\
    1
 \end{bmatrix}.
-\)</span>$</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="x-1-x-2-x-3-x-1-begin-bmatrix-1-1-0-end-bmatrix-x-2-begin-bmatrix-0-1-1-end-bmatrix-x-3-begin-bmatrix-0-0-1-end-bmatrix">
-<h1>Если мы хотим получить вектор, являющийся их линейной комбинацией с коэффициентами <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span>, то можем записать эту комбинацию так:
-$$
+\end{split}\]</div>
+<p>Если мы хотим получить вектор, являющийся их линейной комбинацией с коэффициентами <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span>, то можем записать эту комбинацию так:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 x_1
-\begin{bmatrix}
-1 \
--1 \
-0
+\begin{bmatrix} 
+   1 \\
+   -1 \\
+   0
 \end{bmatrix}
 +
 x_2
-\begin{bmatrix}
-0 \
-1 \
--1
+\begin{bmatrix} 
+   0 \\
+   1 \\
+   -1
 \end{bmatrix}
 +
 x_3
-\begin{bmatrix}
-0 \
-0 \
-1
-\end{bmatrix}<a class="headerlink" href="#x-1-x-2-x-3-x-1-begin-bmatrix-1-1-0-end-bmatrix-x-2-begin-bmatrix-0-1-1-end-bmatrix-x-3-begin-bmatrix-0-0-1-end-bmatrix" title="Link to this heading">#</a></h1>
-<p>\begin{bmatrix}
-x_1 \
-x_2 - x_1\
-x_3 - x_2
+\begin{bmatrix} 
+   0 \\
+   0 \\
+   1
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   x_1 \\
+   x_2 - x_1\\
+   x_3 - x_2
 \end{bmatrix}.
-$$</p>
+\end{split}\]</div>
 <p>Здесь каждая компонента итогового вектора получается путём соответствующего сложения и вычитания коэффициентов <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span>. Мы видим, что первая строка равна <span class="math notranslate nohighlight">\(x_1\)</span>, вторая — <span class="math notranslate nohighlight">\(x_2 - x_1\)</span>, а третья — <span class="math notranslate nohighlight">\(x_3 - x_2\)</span>.</p>
 <p>Чтобы представить то же самое в более компактном виде, достаточно расположить вектора <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span> и <span class="math notranslate nohighlight">\(\boldsymbol{w}\)</span> в столбцы одного объекта <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span>, который называется <strong>матрица</strong>. Тогда произведение этой матрицы <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> на вектор <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> ( с компонентами <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span> ) даёт ту же самую линейную комбинацию:</p>
 <div class="math notranslate nohighlight">
@@ -474,6 +461,422 @@ $$</p>
 \end{bmatrix}.
 \end{split}\]</div>
 <p>Таким образом, умножение матрицы на столбец коэффициентов <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> по сути другая запись линейной комбинации векторов <span class="math notranslate nohighlight">\(\boldsymbol{u}, \boldsymbol{v}, \boldsymbol{w}\)</span> с соответствующими весами <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Задание матриц в numpy</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Матрица A:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Матрица B:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+<span class="c1"># Сложение матриц</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">B</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Сложение матриц A и B:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+
+<span class="c1"># Вычитание матриц</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Вычитание матриц A и B:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Матрица A:
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+
+Матрица B:
+[[9 8 7]
+ [6 5 4]
+ [3 2 1]]
+
+Сложение матриц A и B:
+[[10 10 10]
+ [10 10 10]
+ [10 10 10]]
+
+Вычитание матриц A и B:
+[[-8 -6 -4]
+ [-2  0  2]
+ [ 4  6  8]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Матрицы это не просто другой способ записать линейную комбинацию. Можно сказать, что матрица <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> действует на вектор-столбец <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> и в результате получается линейная комбинация <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> с коэфициентами <span class="math notranslate nohighlight">\(x_i\)</span> и столбцами матрицы <span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{A}\boldsymbol{x} =
+\begin{bmatrix} 
+   1 &amp; 0 &amp; 0\\
+   -1 &amp; 1 &amp; 0\\
+   0 &amp; -1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix} 
+   x_1 \\
+   x_2 \\
+   x_3
+\end{bmatrix}
+=
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+=
+x_1
+\begin{bmatrix} 
+   1 \\
+   -1 \\
+   0
+\end{bmatrix}
++
+x_2
+\begin{bmatrix} 
+   0 \\
+   1 \\
+   -1
+\end{bmatrix}
++
+x_3
+\begin{bmatrix} 
+   0 \\
+   0 \\
+   1
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   x_1 \\
+   x_2 - x_1\\
+   x_3 - x_2
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   b_1 \\
+   b_2 \\
+   b_3
+\end{bmatrix}
+=
+\boldsymbol{b}
+\end{split}\]</div>
+<p>Есть другой подход - это умножение строк матрицы на вектор столбец:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{A}\boldsymbol{x} =
+\begin{bmatrix} 
+   1 &amp; 0 &amp; 0\\
+   -1 &amp; 1 &amp; 0\\
+   0 &amp; -1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix} 
+   x_1 \\
+   x_2 \\
+   x_3
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   \left(1, 0, 0 \right) \cdot \left(x_1, x_2, x_3 \right) \\
+   \left(-1, 1, 0 \right) \cdot \left(x_1, x_2, x_3 \right) \\
+   \left(0, -1, 1 \right) \cdot \left(x_1, x_2, x_3 \right)
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   x_1 \\
+   x_2 - x_1\\
+   x_3 - x_2
+\end{bmatrix}
+\end{split}\]</div>
+<p>Это более удобный подход для вычислений, но первый подход имеет важный смысл, который станет понятен далее, поэмтому не будем сбрасывать его со счетов.</p>
+<section id="id2">
+<h2>Системы линейных уравнений<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>В примере с линейной комбинацией была известна матрица и коэффициенты, и нужно было вычислить неизвестный результат <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>.<br />
+Однако можно сменить точку зрения.</p>
+<p><strong>Старое утверждение</strong>:</p>
+<ul class="simple">
+<li><p>Вычислить линейную комбинацию <span class="math notranslate nohighlight">\(x_1 \boldsymbol{u} + x_2 \boldsymbol{v} + x_3 \boldsymbol{w}\)</span>, чтобы найти <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>.</p></li>
+</ul>
+<p><strong>Новый вопрос</strong>:</p>
+<ul class="simple">
+<li><p>Какая линейная комбинация векторов <span class="math notranslate nohighlight">\(\boldsymbol{u}, \boldsymbol{v}, \boldsymbol{w}\)</span> даёт определённый вектор <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>?</p></li>
+</ul>
+<p>Это приводит к задаче нахождения коэффициентов <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span>, таких что:</p>
+<div class="math notranslate nohighlight">
+\[
+x_1 \boldsymbol{u} + x_2 \boldsymbol{v} + x_3 \boldsymbol{w} = \boldsymbol{b}.
+\]</div>
+<p>Или в матричной форме:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b},
+\]</div>
+<p>где:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{A}\)</span> — матрица, составленная из столбцов <span class="math notranslate nohighlight">\(\boldsymbol{u}, \boldsymbol{v}, \boldsymbol{w}\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> — вектор коэффициентов <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> — заданный вектор результата.</p></li>
+</ul>
+<p>Таким образом, задача сводится к решению системы линейных уравнений, где нужно найти <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>, удовлетворяющее этому равенству.</p>
+<p>В примере выше нужно найти такой <span class="math notranslate nohighlight">\(\boldsymbol{x} \)</span>, что в результате действия матрицы <span class="math notranslate nohighlight">\(\boldsymbol{A} \)</span> получиться вектор <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{A}\boldsymbol{x} =
+\begin{bmatrix} 
+   1 &amp; 0 &amp; 0\\
+   -1 &amp; 1 &amp; 0\\
+   0 &amp; -1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix} 
+   x_1 \\
+   x_2 \\
+   x_3
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   x_1 &amp;  &amp; \\
+   -x_1 &amp; +x_2 &amp;  \\
+     &amp; -x_2 &amp; +x_3
+\end{bmatrix}=
+\begin{bmatrix} 
+   b_1 \\
+   b_2 \\
+   b_3
+\end{bmatrix}
+\end{split}\]</div>
+<p>Получается система уравнений. Решение этой системы можно получить последовательной подстановкой:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{matrix}
+   x_1 &amp;= &amp;b_1\\
+   x_2 &amp;= &amp;b_1 &amp; +&amp; b_2\\
+   x_3 &amp;= &amp;b_1 &amp; +&amp; b_2 &amp;+&amp; b_3
+\end{matrix}
+\end{split}\]</div>
+<p>Правая часть решения подозрительно напоминает векторстолбец полученный воздействем матрицы на вектор <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span>, поэтому попробую представить ее как произведение.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+   x_1 \\
+   x_2 \\
+   x_3 
+\end{bmatrix} =
+\begin{bmatrix}
+   b_1&amp;\\
+   b_1&amp; + &amp;b_2\\
+   b_1&amp; + &amp;b_2 &amp;+ &amp;b_3
+\end{bmatrix} =
+\begin{bmatrix}
+   1 &amp; 0 &amp; 0\\
+   1 &amp; 1 &amp; 0\\
+   1 &amp; 1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+   b_1\\
+   b_2\\
+   b_3
+\end{bmatrix} 
+\end{split}\]</div>
+<p>Матрицу котроая доставляет решение из известного вектора <span class="math notranslate nohighlight">\( \boldsymbol{b} \)</span> называют обратной матрицей <span class="math notranslate nohighlight">\(\boldsymbol{A}^{-1}\)</span>.
+Если уравнение записывается как <span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x} = \boldsymbol{b}\)</span>, то решение для неизвестных коэффициентов линейной комбинации <span class="math notranslate nohighlight">\(\boldsymbol{x} = \boldsymbol{A}^{-1}\boldsymbol{b}\)</span></p>
+<p><strong>Всегда ли существует обратная матрица</strong>? Что получиться если заменить последний вектор <span class="math notranslate nohighlight">\(\boldsymbol{w}\)</span>?
+Заменим вектор на <span class="math notranslate nohighlight">\(\boldsymbol{w*}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{u} = 
+\begin{bmatrix} 
+   1 \\
+   -1 \\
+   0
+\end{bmatrix}
+\quad
+\boldsymbol{v} = 
+\begin{bmatrix} 
+   0 \\
+   1 \\
+   -1
+\end{bmatrix}
+\quad
+\boldsymbol{w^*} = 
+\begin{bmatrix} 
+   -1 \\
+   0 \\
+   1
+\end{bmatrix}
+\end{split}\]</div>
+<p>Тогда получиться вот такая линейная комбинация:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{C}\boldsymbol{x} =
+\begin{bmatrix} 
+   1 &amp; 0 &amp; -1\\
+   -1 &amp; 1 &amp; 0\\
+   0 &amp; -1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix} 
+   x_1 \\
+   x_2 \\
+   x_3
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   x_1 - x_3\\
+   x_2 - x_1\\
+   x_3 - x_2
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   b_1 \\
+   b_2 \\
+   b_3
+\end{bmatrix}
+=
+\boldsymbol{b}
+\end{split}\]</div>
+<p>В случае если линейная комбинация дает нуль-вектор, т.е. правая часть равна <span class="math notranslate nohighlight">\(0\)</span> : <span class="math notranslate nohighlight">\(\boldsymbol{b} = \boldsymbol{0}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 
+   x_1 - x_3\\
+   x_2 - x_1\\
+   x_3 - x_2
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   0 \\
+   0 \\
+   0
+\end{bmatrix}
+=
+\boldsymbol{b}
+\end{split}\]</div>
+<p>тогда решением будет любой вектор вида:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 
+   x_1 \\
+   x_2 \\
+   x_3
+\end{bmatrix} =
+\begin{bmatrix} 
+   c \\
+   c \\
+   c
+\end{bmatrix} ,
+\end{split}\]</div>
+<p>где <span class="math notranslate nohighlight">\(c\)</span> - констаната. Таким образом получается бесконечное множество возможных решений.</p>
+<p>Если в качестве вектора <span class="math notranslate nohighlight">\(\boldsymbol{b}\)</span> взять любой вектор, сумма компонент которого отлична от 0, тогда решений нет вовсе.</p>
+<p>Например:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 
+   x_1 - x_3\\
+   x_2 - x_1\\
+   x_3 - x_2
+\end{bmatrix}
+=
+\begin{bmatrix} 
+   1 \\
+   2 \\
+   3
+\end{bmatrix}
+\end{split}\]</div>
+<p>Сумма компонент вектора слева должна быть равна сумме компонент вектора справа (если векторы равны), но сумма слева равна 0, а справа — 6.</p>
+<p>Таким образом, какие бы <span class="math notranslate nohighlight">\(x\)</span> мы ни брали, мы не получим решения.</p>
+<p>Как это можно интерпретировать геометрически?<br />
+Воспользуюсь питонячей функцией, строящей все линейные комбинации:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_linear_combinations_3d</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="n">vector2</span><span class="p">,</span> <span class="n">vector3</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">range_val</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the linear combinations of two 3D vectors in 3D space.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        vector1 (numpy array): First 3D vector.</span>
+<span class="sd">        vector2 (numpy array): Second 3D vector.</span>
+<span class="sd">        vector3 (numpy array): Third 3D vector.</span>
+<span class="sd">        step (float): Step size for the coefficients.</span>
+<span class="sd">        range_val (float): Maximum absolute value of the coefficients.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Generate coefficients for the linear combinations</span>
+    <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">range_val</span><span class="p">,</span> <span class="n">range_val</span> <span class="o">+</span> <span class="n">step</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+    
+    <span class="c1"># Prepare a list to store all combinations</span>
+    <span class="n">combinations</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="p">:</span>
+                <span class="n">combination</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">vector1</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">vector2</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">vector3</span>
+                <span class="n">combinations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span>
+
+    <span class="n">combinations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">combinations</span><span class="p">)</span>
+    
+    <span class="c1"># Create a 3D plot</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Plot the linear combinations</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">combinations</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">combinations</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">combinations</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Линейные комбинации&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Plot the original vectors</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vector1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vector1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vector1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Вектор 1&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vector2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vector2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vector2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Вектор 2&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vector3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vector3</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vector3</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Вектор 3&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Add labels and legend</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X-axis&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y-axis&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Z-axis&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Линейные комбинации векторов&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vector1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">vector2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">vector3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+
+<span class="n">plot_linear_combinations_3d</span><span class="p">(</span><span class="n">vector3</span><span class="p">,</span> <span class="n">vector2</span><span class="p">,</span> <span class="n">vector1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">range_val</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9af7790e4ff1bd65799e8027554e21c27551b7d0b589be947466b8d20382b5e3.png" src="../_images/9af7790e4ff1bd65799e8027554e21c27551b7d0b589be947466b8d20382b5e3.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h2>Зависимость и независимость<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>Видно что все три вектора <span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span>,  <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span> , <span class="math notranslate nohighlight">\(\boldsymbol{w^*}\)</span> лежат в одной плоскости и любые их линейные комбинации не способны заполнить все пространстово, они всегда оказываются в плоскости, в которой лежат вектора.
+Как понять, что вектора лежат в одной плоскости?
+В нашем случа <span class="math notranslate nohighlight">\(\boldsymbol{w^*} = -\boldsymbol{v} -\boldsymbol{u}\)</span> , т.е. один из векторов, является линейной комбинацией остальных.
+Зафиксируем следующие утверждения:
+<span class="math notranslate nohighlight">\(\boldsymbol{w},\boldsymbol{v}, \boldsymbol{u}\)</span> независимы потому, что не существует линейной комбинации кроме <span class="math notranslate nohighlight">\(0 \cdot \boldsymbol{w} + 0 \cdot \boldsymbol{v} + 0 \cdot \boldsymbol{u}\)</span> которая даст <span class="math notranslate nohighlight">\(\boldsymbol{b} = \boldsymbol{0}\)</span>.
+<span class="math notranslate nohighlight">\(\boldsymbol{w^*},\boldsymbol{v}, \boldsymbol{u}\)</span> зависимы потому, что есть линейные комбинации кроме <span class="math notranslate nohighlight">\(0 \cdot \boldsymbol{w^*} + 0 \cdot \boldsymbol{v} + 0 \cdot \boldsymbol{u}\)</span> которая даст <span class="math notranslate nohighlight">\(\boldsymbol{b} = \boldsymbol{0}\)</span>.</p>
+<p>Таким образом линейная независимость столбцов матрицы говорить о том, что существует обратная к ней и единственное решение <span class="math notranslate nohighlight">\(\boldsymbol{A}\boldsymbol{x}=\boldsymbol{0}\)</span> . И наооборот - линейная зависимость столбцов сообщает о том, что обратной матрицы нет, а уравнение <span class="math notranslate nohighlight">\(\boldsymbol{С}\boldsymbol{x}=\boldsymbol{0}\)</span> имеет бесконечное количество решений.</p>
+<p>Следующая глава будет подробно рассматривать вопросы вычисления обратной матрицы и операции с матрицами.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -506,6 +909,24 @@ $$</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="p1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Вектор</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../ch2/main.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Решение линейных уравнений</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -523,31 +944,9 @@ $$</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Матрицы</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#x-1-x-2-x-3-x-1-begin-bmatrix-1-1-0-end-bmatrix-x-2-begin-bmatrix-0-1-1-end-bmatrix-x-3-begin-bmatrix-0-0-1-end-bmatrix">Если мы хотим получить вектор, являющийся их линейной комбинацией с коэффициентами <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span>, то можем записать эту комбинацию так:
-$$
-x_1
-\begin{bmatrix}
-1 \
--1 \
-0
-\end{bmatrix}
-+
-x_2
-\begin{bmatrix}
-0 \
-1 \
--1
-\end{bmatrix}
-+
-x_3
-\begin{bmatrix}
-0 \
-0 \
-1
-\end{bmatrix}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Системы линейных уравнений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Зависимость и независимость</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
