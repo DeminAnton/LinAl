@@ -1,0 +1,1022 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Элиминация &#8212; Линейная Алгебра. Конспект c питоном.</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ch2/p2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Правила обращения с матрицами" href="p3.html" />
+    <link rel="prev" title="Системы линейных уравнений" href="p1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Линейная Алгебра. Конспект c питоном. - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Линейная Алгебра. Конспект c питоном. - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch1/main.html">Векторы. Операции с векторами. Матрицы.</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ch1/p1.html">Вектор</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch1/p2.html">Матрицы</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="main.html">Решение линейных уравнений</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p1.html">Системы линейных уравнений</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Элиминация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p3.html">Правила обращения с матрицами</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p4.html">Транспонирование</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p5.html">Обратная матрица</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ch2/p2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Элиминация</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rightarrow">Эллиминация <span class="math notranslate nohighlight">\(\rightarrow\)</span> Метод Гаусса</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. Основные идеи и формулировки</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. Элементарные операции над строками</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3. Прямой ход (приведение к верхнетреугольному виду)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">4. Обратный ход (нахождение решения)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">5. Пример</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Шаг 1. Составим расширенную матрицу</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Шаг 2. Прямой ход</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Шаг 3. Обратный ход</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Элиминация<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Эта часть конспекта является весьма техничной, в том смысле, что посвящена приёмам решения задач. Как и при освоении любой другой техники, здесь важно регулярно практиковаться выполняя соответствующие упражнения. Часто встречающиеся разделение заданий на «задачи» и «упражнения» действительно актуально: задачи зачастую интереснее, а упражнения позволяют отработать навыки и прийти к автоматизму в применении различных приёмов. Однако без хорошего усвоения технической стороны придётся постоянно спотыкаться об одни и те же грабли, поэтому лучше уделить время детальной проработке методов и впоследствии свободно двигаться вперёд, не возвращаясь к базовым нюансам.</p>
+<p>Решение системы уравнений можно выполнять последовательной подстановкой: сначала выражаем одну неизвестную через другие, затем подставляем это выражение в остальные уравнения. Однако такой метод становится крайне трудоёмким даже для систем из четырёх уравнений. Есть другой, более изящный способ, который основывается на двух простых приёмах:</p>
+<ul class="simple">
+<li><p>Если умножить обе части уравнения на одно и то же число, равенство сохраняется.</p></li>
+<li><p>Если сложить два уравнения (левую часть с левой, а правую часть с правой), равенство также сохраняется.</p></li>
+</ul>
+<p>В случае с системой из двух уравнений можно поступить следующим образом:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{До} \quad
+\begin{cases} 
+   x &amp; - &amp; 2y &amp; = &amp; 1 &amp; (\text{Умножим первое уравнение на } -3)\\
+   3x &amp; + &amp; 2y &amp; = &amp; 11 &amp; (\text{и сложим его со вторым}) 
+\end{cases}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{После}
+\quad
+\begin{cases} 
+   x &amp; - &amp; 2y &amp; = &amp; 1,  \\
+   &amp;  &amp; 8y &amp; = &amp; 8
+\end{cases}
+\end{split}\]</div>
+<p>Очевидно, что мы также можем менять уравнения местами — это не повлияет на решение системы. Найдя <span class="math notranslate nohighlight">\(y\)</span>, легко вычислить <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Всё это можно выполнять в матричной форме.</p>
+<p><strong>Расширенная матрица</strong> записывается следующим образом: коэффициенты при неизвестных размещаются слева, а свободные члены справа, разделённые чертой. Для системы</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+x &amp;- 2y&amp; = &amp;1,\\
+3x &amp;+ 2y&amp; = &amp;11
+\end{cases}
+\end{split}\]</div>
+<p>соответствующая расширенная матрица выглядит так:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{cc|c}
+1 &amp; -2 &amp; 1\\
+3 &amp;  2 &amp; 11
+\end{array}
+\right]
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Первый столбец представляет коэффициенты при <span class="math notranslate nohighlight">\(x\)</span>,</p></li>
+<li><p>Второй столбец — коэффициенты при <span class="math notranslate nohighlight">\(y\)</span>,</p></li>
+<li><p>Справа за чертой указаны свободные члены <span class="math notranslate nohighlight">\(1\)</span> и <span class="math notranslate nohighlight">\(11\)</span>.</p></li>
+</ul>
+<p>Теперь применим те же действия (умножение строки на число, сложение или вычитание строк) к строкам матрицы. Например, умножим первую строку на <span class="math notranslate nohighlight">\(-3\)</span> и прибавим ко второй строке:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Первая строка} \times (-3) \colon 
+\begin{pmatrix}
+1 &amp; -2 &amp; | &amp; 1
+\end{pmatrix}
+\,\longrightarrow\,
+\begin{pmatrix}
+-3 &amp; 6 &amp; | &amp; -3
+\end{pmatrix}.
+\]</div>
+<p>Сложим эту строку со второй строкой:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{pmatrix}
+3 &amp; 2 &amp; | &amp; 11
+\end{pmatrix}
++
+\begin{pmatrix}
+-3 &amp; 6 &amp; | &amp; -3
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 &amp; 8 &amp; | &amp; 8
+\end{pmatrix}.
+\]</div>
+<p>Теперь заменяем вторую строку на результат. Расширенная матрица принимает вид:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{cc|c}
+1 &amp; -2 &amp; 1\\
+0 &amp; 8  &amp; 8
+\end{array}
+\right]
+\end{split}\]</div>
+<p>Из второй строки сразу следует, что <span class="math notranslate nohighlight">\(8y = 8\)</span>, то есть <span class="math notranslate nohighlight">\(y = 1\)</span>. Подставляем это значение <span class="math notranslate nohighlight">\(y = 1\)</span> в первую строку <span class="math notranslate nohighlight">\((x - 2y = 1)\)</span> и находим:</p>
+<div class="math notranslate nohighlight">
+\[
+x - 2 \cdot 1 = 1 \quad \Rightarrow \quad x = 3.
+\]</div>
+<p>Таким образом, операции, которые мы выполняем с уравнениями (умножение на число, сложение уравнений и перестановка строк), легко применяются к строкам <strong>расширенной матрицы</strong>. Это и есть матричный способ элиминации. Он позволяет решать системы линейных уравнений значительно эффективнее.</p>
+<section id="rightarrow">
+<h2>Эллиминация <span class="math notranslate nohighlight">\(\rightarrow\)</span> Метод Гаусса<a class="headerlink" href="#rightarrow" title="Link to this heading">#</a></h2>
+<p>Такой способ исключения неизвестных называется <strong>Метод Гаусса</strong> (или метод последовательного исключения неизвестных) — это один из основных алгоритмов решения систем линейных уравнений. Он основан на выполнении элементарных операций над строками (или столбцами) матрицы системы с целью привести систему к треугольному виду, а затем найти решение «обратным ходом. Выше я уже показал как это работает, но этот прием можно обощить системы любой размерности.</p>
+<hr class="docutils" />
+<section id="id2">
+<h3>1. Основные идеи и формулировки<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Рассмотрим систему линейных уравнений из <span class="math notranslate nohighlight">\(n\)</span> уравнений с <span class="math notranslate nohighlight">\(n\)</span> неизвестными:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+a_{11} x_1 + a_{12} x_2 + \dots + a_{1n} x_n = b_1, \\
+a_{21} x_1 + a_{22} x_2 + \dots + a_{2n} x_n = b_2, \\
+\quad \vdots \\
+a_{n1} x_1 + a_{n2} x_2 + \dots + a_{nn} x_n = b_n.
+\end{cases}
+\end{split}\]</div>
+<p>Можно записать это в матричной форме как:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{A} \mathbf{x} = \mathbf{b},
+\]</div>
+<p>где</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{A} = 
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{n1} &amp; a_{n2} &amp; \dots &amp; a_{nn}
+\end{bmatrix},
+\quad
+\mathbf{x} = 
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix},
+\quad
+\mathbf{b} = 
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+\vdots \\
+b_n
+\end{bmatrix}.
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(a_{ij}\)</span> - это элемент матрицы в <span class="math notranslate nohighlight">\(i\)</span>-ой строке <span class="math notranslate nohighlight">\(j\)</span>-ом столбце.</p>
+<p>Для удобства выполнения вычислений создадим <strong>расширенную матрицу</strong> <span class="math notranslate nohighlight">\(\left[ \begin{array}{c|c} \mathbf{A} &amp; \mathbf{b} \end{array} \right]\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[ \begin{array}{c|c} \mathbf{A} &amp; \mathbf{b} \end{array} \right] = 
+\left[
+\begin{array}{cccc|c}
+a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} &amp;  b_1 \\
+a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} &amp;  b_2 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+a_{n1} &amp; a_{n2} &amp; \dots &amp; a_{nn} &amp;  b_n
+\end{array}
+\right].
+\end{split}\]</div>
+<p>Метод Гаусса заключается в том, чтобы с помощью элементарных преобразований строк привести эту расширенную матрицу к <strong>треугольному (ступенчатому) виду</strong>, а затем найти решение.</p>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h3>2. Элементарные операции над строками<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Для преобразования системы можно выполнять три вида элементарных операций над строками (уравнениями) расширенной матрицы:</p>
+<ol class="arabic simple">
+<li><p><strong>Перестановка строк</strong> (менять местами <span class="math notranslate nohighlight">\(i\)</span> -ю и <span class="math notranslate nohighlight">\(j\)</span> -ю строки).</p></li>
+<li><p><strong>Умножение строки на ненулевое число</strong>.</p></li>
+<li><p><strong>Прибавление к одной строке другой строки, умноженной на некоторое число</strong>.</p></li>
+</ol>
+<p>Эти операции не меняют решения системы или меняют их предсказуемым образом (например, умножение строки на коэффициент  <span class="math notranslate nohighlight">\(\neq 0\)</span> не меняет решение, а перестановка строк просто меняет порядок уравнений).</p>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h3>3. Прямой ход (приведение к верхнетреугольному виду)<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Предположим, что мы хотим получить систему в виде, где первые <span class="math notranslate nohighlight">\(k\)</span> строк уже преобразованы, а в <span class="math notranslate nohighlight">\((k+1)\)</span>-й строке мы хотим обнулить все элементы левее диагонального:</p>
+<ol class="arabic simple">
+<li><p><strong>Выбираем опорный элемент</strong> <span class="math notranslate nohighlight">\(k\)</span>-й строке. Обычно это элемент на главной диагонали — <span class="math notranslate nohighlight">\(a_{kk}\)</span> .</p>
+<ul class="simple">
+<li><p>Если <span class="math notranslate nohighlight">\(a_{kk} = 0\)</span> , то нужно поменять строку <span class="math notranslate nohighlight">\(k\)</span> с какой-то нижней строкой <span class="math notranslate nohighlight">\(m\)</span> <span class="math notranslate nohighlight">\(m &gt; k\)</span>, у которой элемент в том же столбце <span class="math notranslate nohighlight">\((m, k)\)</span> не равен нулю. Если таких строк нет, значит, в этом столбце все элементы ниже диагонали равны нулю, и нужно двигаться дальше по диагонали (либо система может оказаться вырожденной, если вся матрица в каком-то моменте обнуляется).</p></li>
+</ul>
+</li>
+<li><p><strong>Нормируем <span class="math notranslate nohighlight">\(k\)</span> -ю строку</strong> (по желанию, если удобно в вычислениях): делим всю <span class="math notranslate nohighlight">\(k\)</span> -ю строку на <span class="math notranslate nohighlight">\(a_{kk}\)</span> , чтобы сделать опорный элемент равным 1. Это упростит дальнейшие вычисления.</p></li>
+<li><p><strong>Обнуляем элементы ниже ведущего</strong>: для всех строк <span class="math notranslate nohighlight">\(i\)</span> от <span class="math notranslate nohighlight">\(k+1\)</span> до <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<ul class="simple">
+<li><p>Вычисляем коэффициент <span class="math notranslate nohighlight">\( \alpha = \dfrac{a_{ik}}{a_{kk}} \)</span> (если <span class="math notranslate nohighlight">\(a_{kk} \neq 0\)</span>) .</p></li>
+<li><p>Заменяем <span class="math notranslate nohighlight">\( i \)</span>-ю строку на <span class="math notranslate nohighlight">\( (\text{строка } i) - \alpha \times (\text{строка } k)\)</span> .<br />
+В результате в столбце <span class="math notranslate nohighlight">\(k\)</span> в строках ниже <span class="math notranslate nohighlight">\(k\)</span> -й появятся нули.</p></li>
+</ul>
+</li>
+<li><p><strong>Переходим к следующему опорному элементу по диагонали</strong>  <span class="math notranslate nohighlight">\((k \leftarrow k+1)\)</span> и повторяем процесс до тех пор, пока не достигнем последней строки.</p></li>
+</ol>
+<p>В итоге после прямого хода расширенная матрица (и сама система) приобретёт <strong>верхнетреугольный (ступенчатый)</strong> вид:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccccc|c}
+* &amp; * &amp; * &amp; \dots &amp; * &amp;  * \\
+0 &amp; * &amp; * &amp; \dots &amp; * &amp;  * \\
+0 &amp; 0 &amp; * &amp; \dots &amp; * &amp;  * \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp;  \vdots \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; * &amp; *
+\end{array}
+\right]
+\end{split}\]</div>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h3>4. Обратный ход (нахождение решения)<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>После того как мы получили матрицу в верхнетреугольном виде, можно последовательно найти все неизвестные, двигаясь снизу вверх.</p>
+<p>Пусть итоговая (верхнетреугольная) система выглядит так:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+u_{11} x_1 + u_{12} x_2 + \dots + u_{1n} x_n = d_1, \\
+0 \cdot x_1 + u_{22} x_2 + \dots + u_{2n} x_n = d_2, \\
+\quad \quad \vdots \\
+0 \cdot x_1 + 0 \cdot x_2 + \dots + u_{nn} x_n = d_n.
+\end{cases}
+\end{split}\]</div>
+<p>где <span class="math notranslate nohighlight">\(u_{kk} \neq 0\)</span> (или хотя бы большинство из них в невырожденном случае).</p>
+<ol class="arabic">
+<li><p>Сначала находим <span class="math notranslate nohighlight">\(x_n\)</span> из последнего уравнения:</p>
+<div class="math notranslate nohighlight">
+\[
+   u_{nn} x_n = d_n \quad \Longrightarrow \quad x_n = \frac{d_n}{u_{nn}}.
+   \]</div>
+</li>
+<li><p>Подставляем найденное <span class="math notranslate nohighlight">\(x_n\)</span> в предпоследнее уравнение и решаем относительно <span class="math notranslate nohighlight">\(x_{n-1}\)</span> .<br />
+То есть:</p>
+<div class="math notranslate nohighlight">
+\[
+   u_{(n-1)(n-1)} x_{n-1} + u_{(n-1)n} x_n = d_{n-1},
+   \]</div>
+<p>где <span class="math notranslate nohighlight">\(x_n\)</span> уже известно. Находим <span class="math notranslate nohighlight">\(x_{n-1}\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[
+   x_{n-1} = \frac{d_{n-1} - u_{(n-1)n} x_n}{u_{(n-1)(n-1)}}.
+   \]</div>
+</li>
+<li><p>Аналогично продолжаем, пока не найдём все переменные <span class="math notranslate nohighlight">\(x_{n-2}, x_{n-3}, \dots, x_1\)</span>.</p></li>
+</ol>
+<p>В результате получаем полный набор решений <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h3>5. Пример<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>Пусть у нас система из 3 уравнений:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+2x + y +  z = 1, \\
+4x - 6y = -2, \\
+-2x + 7y + 2z = 3.
+\end{cases}
+\end{split}\]</div>
+<p>Чтобы не загромождать пример, предполагаем, что переменных три: <span class="math notranslate nohighlight">\(x, y, z\)</span>.</p>
+</section>
+<section id="id7">
+<h3>Шаг 1. Составим расширенную матрицу<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|c}
+2 &amp; 1 &amp; 1 &amp; 1 \\
+4 &amp; -6 &amp; 0 &amp; -2 \\
+-2 &amp; 7 &amp; 2 &amp; 3
+\end{array}
+\right].
+\end{split}\]</div>
+</section>
+<section id="id8">
+<h3>Шаг 2. Прямой ход<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Работаем с первой строкой</strong>:</p>
+<ul>
+<li><p>Опорный элемент <span class="math notranslate nohighlight">\(a_{11} = 2\)</span>. При желании нормируем её: делим каждую ячейку первой строки на 2, чтобы опорный элемент стал <span class="math notranslate nohighlight">\(1\)</span> (не обязательно, но упростит расчёты):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \left[
+     \begin{array}{ccc|c}
+     1 &amp; 0.5 &amp; 0.5 &amp; 0.5 \\
+     4 &amp; -6 &amp; 0 &amp; -2 \\
+     -2 &amp; 7 &amp; 2 &amp; 3
+     \end{array}
+     \right].
+     \end{split}\]</div>
+</li>
+<li><p>Теперь обнулим элементы в первом столбце ниже первой строки:</p>
+<ul>
+<li><p>Для второй строки: коэффициент <span class="math notranslate nohighlight">\(4\)</span>.<br />
+<span class="math notranslate nohighlight">\(\text{Новая вторая строка} = \text{вторая строка} - 4 \times \text{первая строка}:\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+         \bigl(4,\,-6,\,0,\,-2\bigr)
+         \;-\;
+         4 \times \bigl(1,\,0.5,\,0.5,\,0.5\bigr)
+         =
+         \bigl(4 - 4,\;-6 - 2,\;0 - 2,\;-2 - 2\bigr)
+         =
+         \bigl(0,\;-8,\;-2,\;-4\bigr).
+       \]</div>
+</li>
+<li><p>Для третьей строки: коэффициент <span class="math notranslate nohighlight">\(-2\)</span>.<br />
+<span class="math notranslate nohighlight">\(\text{Новая третья строка} = \text{третья строка} - (-2) \times \text{первая строка}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+         \bigl(-2,\,7,\,2,\,3\bigr)
+         \;+\;
+         2 \times \bigl(1,\,0.5,\,0.5,\,0.5\bigr)
+         =
+         \bigl(-2 + 2,\;7 + 1,\;2 + 1,\;3 + 1\bigr)
+         =
+         \bigl(0,\;8,\;3,\;4\bigr).
+       \]</div>
+</li>
+</ul>
+</li>
+<li><p>Итоговая матрица:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \left[
+     \begin{array}{ccc|c}
+     1 &amp; 0.5 &amp; 0.5 &amp; 0.5 \\
+     0 &amp; -8 &amp; -2 &amp; -4 \\
+     0 &amp; 8 &amp; 3 &amp; 4
+     \end{array}
+     \right].
+     \end{split}\]</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Работаем со второй строкой</strong> (теперь опорный элемент <span class="math notranslate nohighlight">\(a_{22} = -8\)</span>):</p>
+<ul>
+<li><p>При желании нормируем вторую строку, разделив на <span class="math notranslate nohighlight">\(-8\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \left[
+     \begin{array}{ccc|c}
+     1 &amp; 0.5 &amp; 0.5 &amp; 0.5 \\
+     0 &amp; 1 &amp; 0.25 &amp; 0.5 \\
+     0 &amp; 8 &amp; 3 &amp; 4
+     \end{array}
+     \right].
+     \end{split}\]</div>
+</li>
+<li><p>Обнулим элемент в третьей строке (второй столбец):</p>
+<ul>
+<li><p>Коэффициент <span class="math notranslate nohighlight">\(8\)</span>.<br />
+<span class="math notranslate nohighlight">\(\text{Новая третья строка} = \text{третья строка} - 8 \times \text{вторая строка}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+         (0,\,8,\,3,\,4)
+         \;-\;
+         8 \times (0,\,1,\,0.25,\,0.5)
+         =
+         (0,\,8 - 8,\,3 - 2,\,4 - 4)
+         =
+         (0,\,0,\,1,\,0).
+       \]</div>
+</li>
+</ul>
+</li>
+<li><p>Итоговая матрица:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \left[
+     \begin{array}{ccc|c}
+     1 &amp; 0.5 &amp; 0.5 &amp; 0.5 \\
+     0 &amp; 1 &amp; 0.25 &amp; 0.5 \\
+     0 &amp; 0 &amp; 1 &amp; 0
+     \end{array}
+     \right].
+     \end{split}\]</div>
+</li>
+</ul>
+</li>
+</ol>
+<p>На этом прямой ход закончен — матрица в верхнетреугольном (ступенчатом) виде.</p>
+</section>
+<section id="id9">
+<h3>Шаг 3. Обратный ход<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>Теперь по этой форме легко найти <span class="math notranslate nohighlight">\(x, y, z\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Из третьей строки: <span class="math notranslate nohighlight">\(1 \cdot z = 0 \;\Rightarrow\; z = 0\)</span></p></li>
+<li><p>Из второй строки: <span class="math notranslate nohighlight">\(y + 0.25 z = 0.5.\)</span> Но <span class="math notranslate nohighlight">\(z = 0\)</span>, значит <span class="math notranslate nohighlight">\(y = 0.5.\)</span></p></li>
+<li><p>Из первой строки: <span class="math notranslate nohighlight">\(x + 0.5y + 0.5z = 0.5.\)</span> Подставляем <span class="math notranslate nohighlight">\(y = 0.5\)</span> и <span class="math notranslate nohighlight">\(z = 0\)</span>:</p></li>
+</ol>
+<p>Итого решение:</p>
+<div class="math notranslate nohighlight">
+\[
+x = 0.25, \quad y = 0.5, \quad z = 0.
+\]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Функции реализующие элементарные операции над матрицами.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">row_swap</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Swap two rows in a NumPy array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : ndarray</span>
+<span class="sd">        A NumPy array of shape (m, n), where `m` is the number of rows </span>
+<span class="sd">        and `n` is the number of columns.</span>
+<span class="sd">    k : int</span>
+<span class="sd">        The index of the first row to be swapped (0-based indexing).</span>
+<span class="sd">    l : int</span>
+<span class="sd">        The index of the second row to be swapped (0-based indexing).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    B : ndarray</span>
+<span class="sd">        A new NumPy array with rows `k` and `l` swapped. The input array `A` </span>
+<span class="sd">        remains unchanged.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The operation is performed by creating a copy of the input array to </span>
+<span class="sd">    ensure the original array is not modified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; A = np.array([[1, 2], [3, 4]])</span>
+<span class="sd">    &gt;&gt;&gt; row_swap(A, 0, 1)</span>
+<span class="sd">    array([[3., 4.],</span>
+<span class="sd">           [1., 2.]])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># m is the number of rows in A</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># n is the number of columns in A</span>
+    
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+        
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+        
+    <span class="k">return</span> <span class="n">B</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">row_scale</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Scale a row of a NumPy array by a given factor.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : ndarray</span>
+<span class="sd">        A NumPy array of shape (m, n), where `m` is the number of rows </span>
+<span class="sd">        and `n` is the number of columns.</span>
+<span class="sd">    k : int</span>
+<span class="sd">        The index of the row to be scaled (0-based indexing).</span>
+<span class="sd">    scale : float</span>
+<span class="sd">        The factor by which to scale the entries of row `k`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    B : ndarray</span>
+<span class="sd">        A new NumPy array with row `k` scaled by `scale`. The input array `A` </span>
+<span class="sd">        remains unchanged.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The operation is performed by creating a copy of the input array to </span>
+<span class="sd">    ensure the original array is not modified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; A = np.array([[1, 2], [3, 4]])</span>
+<span class="sd">    &gt;&gt;&gt; row_scale(A, 1, 2)</span>
+<span class="sd">    array([[ 1.,  2.],</span>
+<span class="sd">           [ 6.,  8.]])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># m is the number of rows in A</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># n is the number of columns in A</span>
+    
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">*=</span> <span class="n">scale</span>
+        
+    <span class="k">return</span> <span class="n">B</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">row_add</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add a scaled version of one row to another in a NumPy array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : ndarray</span>
+<span class="sd">        A NumPy array of shape (m, n), where `m` is the number of rows </span>
+<span class="sd">        and `n` is the number of columns.</span>
+<span class="sd">    k : int</span>
+<span class="sd">        The index of the row to be scaled and added (0-based indexing).</span>
+<span class="sd">    l : int</span>
+<span class="sd">        The index of the row to be modified (0-based indexing).</span>
+<span class="sd">    scale : float</span>
+<span class="sd">        The factor by which to scale the entries of row `k` before adding </span>
+<span class="sd">        them to row `l`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    B : ndarray</span>
+<span class="sd">        A new NumPy array with row `l` modified. The values of row `l` </span>
+<span class="sd">        will be updated by adding the values of row `k`, scaled by `scale`. </span>
+<span class="sd">        The input array `A` remains unchanged.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The operation is performed by creating a copy of the input array to </span>
+<span class="sd">    ensure the original array is not modified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; A = np.array([[1, 2], [3, 4]])</span>
+<span class="sd">    &gt;&gt;&gt; row_add(A, 0, 1, 2)</span>
+<span class="sd">    array([[ 1.,  2.],</span>
+<span class="sd">           [ 5.,  8.]])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># m is the number of rows in A</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># n is the number of columns in A</span>
+    
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+        
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span>
+        
+    <span class="k">return</span> <span class="n">B</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ch2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="p1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Системы линейных уравнений</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="p3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Правила обращения с матрицами</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rightarrow">Эллиминация <span class="math notranslate nohighlight">\(\rightarrow\)</span> Метод Гаусса</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. Основные идеи и формулировки</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. Элементарные операции над строками</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3. Прямой ход (приведение к верхнетреугольному виду)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">4. Обратный ход (нахождение решения)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">5. Пример</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Шаг 1. Составим расширенную матрицу</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Шаг 2. Прямой ход</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Шаг 3. Обратный ход</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anton Demin
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

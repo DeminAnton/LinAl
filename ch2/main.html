@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,9 +60,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch2/main';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Системы линейных уравнений" href="p1.html" />
     <link rel="prev" title="Матрицы" href="../ch1/p2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -91,8 +94,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -159,21 +162,20 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Введение
-                </a>
-            </li>
-        </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ch1/main.html">Векторы. Операции с векторами. Матрицы.</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ch1/p1.html">Вектор</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ch1/p2.html">Матрицы</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Решение линейных уравнений</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Решение линейных уравнений</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="p1.html">Системы линейных уравнений</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p2.html">Элиминация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p3.html">Правила обращения с матрицами</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p4.html">Транспонирование</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p5.html">Обратная матрица</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -220,53 +222,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/DeminAnton/LinAl" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/DeminAnton/LinAl/issues/new?title=Issue%20on%20page%20%2Fch2/main.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -372,6 +327,8 @@
 <h1>Решение линейных уравнений<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>Решение систем линейных уравнений — одна из ключевых задач линейной алгебры, которая объединяет понятия векторов, матриц и линейных комбинаций. Систему можно интерпретировать как поиск таких коэффициентов, которые позволяют представить заданный вектор результата через линейную комбинацию столбцов матрицы. Матрица представляет собой множество базовых векторов, а решение системы определяет, лежит ли вектор результата в пространстве, порождённом этими векторами. Этот подход позволяет анализировать существование, единственность или отсутствие решений, а также строить алгоритмы их поиска.</p>
 <p>В процессе изучения решений систем линейных уравнений будут рассмотрены различные методы и подходы, такие как исключение Гаусса и матричные разложения, которые помогают эффективно решать задачи любого масштаба. Помимо этого, будут продемонстрированы операции с матрицами, их свойства и важные преобразования, такие как транспонирование, нахождение обратной матрицы. Эти методы не только предоставляют инструменты для решения систем, но и иллюстрируют место матриц и векторов в структурах линейной алгебры.</p>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -412,6 +369,15 @@
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Матрицы</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="p1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Системы линейных уравнений</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
