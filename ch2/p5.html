@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,6 +60,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch2/p5';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -295,7 +297,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -311,6 +315,14 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Обратная матрица произведения матриц</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -322,6 +334,364 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Обратная матрица<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Матрица <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> называется <strong>обратимой</strong>, если существует такая матрица <span class="math notranslate nohighlight">\(\mathbf{A}^{-1}\)</span>, что</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} \mathbf{A}^{-1} = \mathbf{A}^{-1} \mathbf{A} = \mathbf{I}.\]</div>
+<p>Здесь <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> — это <strong>единичная матрица</strong>, которая имеет такие свойства:</p>
+<ul class="simple">
+<li><p>Она является квадратной (количество строк равно количеству столбцов).</p></li>
+<li><p>Все элементы на главной диагонали равны <span class="math notranslate nohighlight">\(1\)</span>, а остальные элементы равны <span class="math notranslate nohighlight">\(0\)</span>. Например, для матриц размером <span class="math notranslate nohighlight">\(2 \times 2\)</span> и <span class="math notranslate nohighlight">\(3 \times 3\)</span> это выглядит так:
+$<span class="math notranslate nohighlight">\(
+\mathbf{I}_{2 \times 2} = \begin{bmatrix} 
+1 &amp; 0 \\ 
+0 &amp; 1 
+\end{bmatrix}, \quad
+\mathbf{I}_{3 \times 3} = \begin{bmatrix} 
+1 &amp; 0 &amp; 0 \\ 
+0 &amp; 1 &amp; 0 \\ 
+0 &amp; 0 &amp; 1 
+\end{bmatrix}.
+\)</span>$</p></li>
+<li><p>Умножение любой матрицы <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> на единичную матрицу <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> не изменяет её:<br />
+$<span class="math notranslate nohighlight">\(
+\mathbf{A} \cdot \mathbf{I} = \mathbf{I} \cdot \mathbf{A} = \mathbf{A}.
+\)</span>$</p></li>
+</ul>
+<p>По поводу обратимости можно сделать следующие замечания:</p>
+<ol class="arabic">
+<li><p>Если матрица обратима, то в процессе приведения её к диагональному виду все опорные элементы будут находиться на диагонали.</p></li>
+<li><p>Обратная матрица единственна.</p></li>
+<li><p>Уравнение <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span> имеет единственное решение:</p>
+<div class="math notranslate nohighlight">
+\[
+   \mathbf{A}\mathbf{x} = \mathbf{b} \Longleftrightarrow \mathbf{A}^{-1}\mathbf{A}\mathbf{x} = \mathbf{A}^{-1}\mathbf{b} \Longleftrightarrow \mathbf{I}\mathbf{x} = \mathbf{A}^{-1}\mathbf{b} \Longleftrightarrow \mathbf{x} = \mathbf{A}^{-1}\mathbf{b}.
+   \]</div>
+</li>
+<li><p>Если существует ненулевой вектор <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, такой что <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x} = \mathbf{0}\)</span>, то матрица <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> необратима.</p></li>
+</ol>
+<section id="id2">
+<h2>Обратная матрица произведения матриц<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>Пускай некая матрица получается произведением:
+<span class="math notranslate nohighlight">\(\mathbf{A} \mathbf{B}\)</span>
+Тогда вот такое выражение должно быть верно:</p>
+<div class="math notranslate nohighlight">
+\[(\mathbf{A} \mathbf{B})^{-1} (\mathbf{A} \mathbf{B}) = \mathbf{I}\]</div>
+<p>Если умножить справа на <span class="math notranslate nohighlight">\(\mathbf{B}^{-1} \mathbf{A}^{-1}\)</span> обе части:</p>
+<div class="math notranslate nohighlight">
+\[(\mathbf{A} \mathbf{B})^{-1} (\mathbf{A} \mathbf{B}) \mathbf{B}^{-1} \mathbf{A}^{-1} = \mathbf{I} \mathbf{B}^{-1} \mathbf{A}^{-1}\]</div>
+<p>И учесть что умножение матриц ассциативно (закон про скобки), сокращая попарно множители:</p>
+<div class="math notranslate nohighlight">
+\[(\mathbf{A} \mathbf{B})^{-1} \mathbf{I}  = \mathbf{B}^{-1} \mathbf{A}^{-1}\]</div>
+<div class="math notranslate nohighlight">
+\[(\mathbf{A} \mathbf{B})^{-1}   = \mathbf{B}^{-1} \mathbf{A}^{-1}\]</div>
+<p>Получается, что обратная матрица произведения при раскрытии скобок меняет порядок умножения, прямо как транспонирование!</p>
+<p>А как на счет одновременного транспонирования и обращения матрицы?
+Если у матрицы есть обратная, тогда:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}^{-1} \mathbf{A} = \mathbf{I}.\]</div>
+<p>Транспонируем обе части:</p>
+<div class="math notranslate nohighlight">
+\[(\mathbf{A}^{-1} \mathbf{A})^T = \mathbf{I}^T,\]</div>
+<p>но транспонирование единичной матрицы она и есть, следоваетльно:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}^T (\mathbf{A}^{-1})^T = \mathbf{I}.\]</div>
+<p>Теперь это все можно умножить на <span class="math notranslate nohighlight">\((\mathbf{A}^T)^{-1}\)</span> слева, после сокращения сомножителей получиться, что:</p>
+<div class="math notranslate nohighlight">
+\[(\mathbf{A}^{-1})^T = (\mathbf{A}^T)^{-1}.\]</div>
+<p><strong>Нахождение обратной матрицы элиминацией</strong>:</p>
+<p>Если у матрицы есть обратная:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} \mathbf{A}^{-1} = \mathbf{I},\]</div>
+<p>единичную матрицу можно представить как совокупность вектор-столбцов вида <span class="math notranslate nohighlight">\(e_i\)</span>, где на <span class="math notranslate nohighlight">\(i\)</span>-ой строке будет единица, а остальные элементы равны нулю. Обратную матрицу можно представить в виде неизвестных вектор-столбцов.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}
+\begin{bmatrix} 
+\mathbf{x}_1 &amp; \mathbf{x}_2 &amp; \mathbf{x}_3
+\end{bmatrix}
+= 
+\begin{bmatrix} 
+\mathbf{e}_1 &amp; \mathbf{e}_2 &amp; \mathbf{e}_3
+\end{bmatrix}.
+\]</div>
+<p>Всё это можно записать как три системы уравнений вида:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}
+\mathbf{x}_i 
+= 
+\mathbf{e}_i,
+\]</div>
+<p>но решать их можно сразу все. Для этого из исходной матрицы создаём расширенную, как и в случае обычной элиминации, но вместо вектора свободных коэффициентов приписываем матрицу из вектор-столбцов <span class="math notranslate nohighlight">\(\mathbf{e}_i\)</span>, т.е. единичную матрицу:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{bmatrix} 
+\mathbf{A}&amp;|&amp;\mathbf{I}
+\end{bmatrix}.
+\]</div>
+<p>Приведя матрицу <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> преобразованиями к <span class="math notranslate nohighlight">\(\mathbf{I}\)</span>, в левой части получим обратную матрицу:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{bmatrix} 
+\mathbf{A}^{-1} \mathbf{A}&amp;|&amp;\mathbf{A}^{-1}  \mathbf{I}
+\end{bmatrix} = 
+\begin{bmatrix} 
+\mathbf{I}&amp;|&amp;\mathbf{A}^{-1}
+\end{bmatrix}.
+\]</div>
+<p>Попробуем найти обратную матрицу при помощи преобразований:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">row_swap</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Swap two rows in a NumPy array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : ndarray</span>
+<span class="sd">        A NumPy array of shape (m, n), where `m` is the number of rows </span>
+<span class="sd">        and `n` is the number of columns.</span>
+<span class="sd">    k : int</span>
+<span class="sd">        The index of the first row to be swapped (0-based indexing).</span>
+<span class="sd">    l : int</span>
+<span class="sd">        The index of the second row to be swapped (0-based indexing).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    B : ndarray</span>
+<span class="sd">        A new NumPy array with rows `k` and `l` swapped. The input array `A` </span>
+<span class="sd">        remains unchanged.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The operation is performed by creating a copy of the input array to </span>
+<span class="sd">    ensure the original array is not modified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; A = np.array([[1, 2], [3, 4]])</span>
+<span class="sd">    &gt;&gt;&gt; row_swap(A, 0, 1)</span>
+<span class="sd">    array([[3., 4.],</span>
+<span class="sd">           [1., 2.]])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># m is the number of rows in A</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># n is the number of columns in A</span>
+    
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+        
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+        
+    <span class="k">return</span> <span class="n">B</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">row_scale</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Scale a row of a NumPy array by a given factor.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : ndarray</span>
+<span class="sd">        A NumPy array of shape (m, n), where `m` is the number of rows </span>
+<span class="sd">        and `n` is the number of columns.</span>
+<span class="sd">    k : int</span>
+<span class="sd">        The index of the row to be scaled (0-based indexing).</span>
+<span class="sd">    scale : float</span>
+<span class="sd">        The factor by which to scale the entries of row `k`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    B : ndarray</span>
+<span class="sd">        A new NumPy array with row `k` scaled by `scale`. The input array `A` </span>
+<span class="sd">        remains unchanged.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The operation is performed by creating a copy of the input array to </span>
+<span class="sd">    ensure the original array is not modified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; A = np.array([[1, 2], [3, 4]])</span>
+<span class="sd">    &gt;&gt;&gt; row_scale(A, 1, 2)</span>
+<span class="sd">    array([[ 1.,  2.],</span>
+<span class="sd">           [ 6.,  8.]])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># m is the number of rows in A</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># n is the number of columns in A</span>
+    
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">*=</span> <span class="n">scale</span>
+        
+    <span class="k">return</span> <span class="n">B</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">row_add</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add a scaled version of one row to another in a NumPy array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : ndarray</span>
+<span class="sd">        A NumPy array of shape (m, n), where `m` is the number of rows </span>
+<span class="sd">        and `n` is the number of columns.</span>
+<span class="sd">    k : int</span>
+<span class="sd">        The index of the row to be scaled and added (0-based indexing).</span>
+<span class="sd">    l : int</span>
+<span class="sd">        The index of the row to be modified (0-based indexing).</span>
+<span class="sd">    scale : float</span>
+<span class="sd">        The factor by which to scale the entries of row `k` before adding </span>
+<span class="sd">        them to row `l`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    B : ndarray</span>
+<span class="sd">        A new NumPy array with row `l` modified. The values of row `l` </span>
+<span class="sd">        will be updated by adding the values of row `k`, scaled by `scale`. </span>
+<span class="sd">        The input array `A` remains unchanged.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The operation is performed by creating a copy of the input array to </span>
+<span class="sd">    ensure the original array is not modified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; A = np.array([[1, 2], [3, 4]])</span>
+<span class="sd">    &gt;&gt;&gt; row_add(A, 0, 1, 2)</span>
+<span class="sd">    array([[ 1.,  2.],</span>
+<span class="sd">           [ 5.,  8.]])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># m is the number of rows in A</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># n is the number of columns in A</span>
+    
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+        
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span>
+        
+    <span class="k">return</span> <span class="n">B</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="c1">#Расширенная матрица, образованная &#39;пристыковкой&#39; единичной матрицы справа.</span>
+<span class="n">Aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+<span class="n">Aug</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 2., -2.,  0.,  1.,  0.,  0.],
+       [ 1.,  4.,  1.,  0.,  1.,  0.],
+       [ 2.,  4.,  8.,  0.,  0.,  1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Aug</span> <span class="o">=</span> <span class="n">row_add</span><span class="p">(</span><span class="n">Aug</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">Aug</span> <span class="o">=</span> <span class="n">row_add</span><span class="p">(</span><span class="n">Aug</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Aug</span> <span class="o">=</span> <span class="n">row_scale</span><span class="p">(</span><span class="n">Aug</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">Aug</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1. , -1. ,  0. ,  0.5,  0. ,  0. ],
+       [ 0. ,  5. ,  1. , -0.5,  1. ,  0. ],
+       [ 0. ,  6. ,  8. , -1. ,  0. ,  1. ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Aug</span> <span class="o">=</span> <span class="n">row_scale</span><span class="p">(</span><span class="n">Aug</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="n">Aug</span> <span class="o">=</span> <span class="n">row_add</span><span class="p">(</span><span class="n">Aug</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">Aug</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1. , -1. ,  0. ,  0.5,  0. ,  0. ],
+       [ 0. ,  1. ,  0.2, -0.1,  0.2,  0. ],
+       [ 0. ,  0. ,  6.8, -0.4, -1.2,  1. ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Aug</span> <span class="o">=</span> <span class="n">row_scale</span><span class="p">(</span><span class="n">Aug</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">6.8</span><span class="p">)</span>
+<span class="n">Aug</span> <span class="o">=</span> <span class="n">row_add</span><span class="p">(</span><span class="n">Aug</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">Aug</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -1.        ,  0.        ,  0.5       ,  0.        ,
+         0.        ],
+       [ 0.        ,  1.        ,  0.        , -0.08823529,  0.23529412,
+        -0.02941176],
+       [ 0.        ,  0.        ,  1.        , -0.05882353, -0.17647059,
+         0.14705882]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_inv</span> <span class="o">=</span> <span class="n">Aug</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Исходная матрица:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Обратная матрица:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Произведение исходной и обратной матриц:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_inv</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Исходная матрица:
+[[ 2 -2  0]
+ [ 1  4  1]
+ [ 2  4  8]]
+Обратная матрица:
+[[ 0.5         0.          0.        ]
+ [-0.08823529  0.23529412 -0.02941176]
+ [-0.05882353 -0.17647059  0.14705882]]
+Произведение исходной и обратной матриц:
+[[ 1.00000000e+00 -1.00000000e+00  0.00000000e+00]
+ [ 6.93889390e-18  1.00000000e+00  0.00000000e+00]
+ [ 0.00000000e+00 -1.11022302e-16  1.00000000e+00]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Видно, что произведение дало почти единичную матрицу, но ошибки округления оставили близкие к нулю, но не нулевые элементы вы -16  и -18 степенях.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -369,6 +739,22 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Обратная матрица произведения матриц</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -500,12 +500,7 @@ A^T B^T =
 \[
 \mathbf{x} \cdot \mathbf{y} = \mathbf{x}^T \mathbf{y}
 \]</div>
-<p>Так-же можно ввести другое произведение:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf{x} \cdot \mathbf{y} = \mathbf{x}^T \mathbf{y}
-\]</div>
-<p>Так же можно ввести <strong>внешнее произведение</strong>:</p>
+<p>Так же можно ввести <strong>внешнее произведение</strong>, где вектор-столбец умножается на векторстоку:</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbf{x} \cdot \mathbf{y}^T = \mathbf{Q},
@@ -570,6 +565,13 @@ A^T B^T =
 </div>
 </div>
 </div>
+<p>Вертеть матрицы транспонированием забавно, конечно, но какое место в математических структурах занимает транспонирование?<br />
+Хотя транспонирование <span class="math notranslate nohighlight">\(\mathbf{A}^T\)</span> можно интерпретировать как отражение матрицы относительно её главной диагонали, это лишь репрезентация операции. В математике же транспонирование можно описать как действие, обеспечивающее равенство внутренних произведений для любых векторов <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> и <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+(\mathbf{A} \mathbf{x})^T \mathbf{y} = \mathbf{x}^T (\mathbf{A}^T \mathbf{y})
+\]</div>
+<p>Таким образом, это равенство иллюстрирует фундаментальную роль транспонирования: обеспечение симметрии внутренних произведений.</p>
 </section>
 
     <script type="text/x-thebe-config">
