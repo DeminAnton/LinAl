@@ -4,7 +4,15 @@
 format: jb-book
 root: intro
 chapters:
-- file: path/to/chapter1
-- file: path/to/chapter2
+- file: ch1/main
   sections:
-  - file: path/to/chapter2/section1
+  - file: ch1/p1
+  - file: ch1/p2
+- file: ch2/main
+  sections:
+  - file: ch2/p1
+  - file: ch2/p2
+  - file: ch2/p3
+  - file: ch2/p4
+  - file: ch2/p5
+  

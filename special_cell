@@ -1,0 +1,11 @@
+```{dropdown} Proof of Theorem
+**Theorem:** For all \(x > 0\), the following holds...
+
+**Proof:**
+Let \(f(x) = x^2 + 2x + 1\). Expanding it gives:
+\[
+f(x) = (x+1)^2
+\]
+Thus, \(f(x)\) is always positive for \(x > 0\).
+
+

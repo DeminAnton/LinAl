@@ -1,0 +1,1218 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Вектор &#8212; Линейная Алгебра. Конспект c питоном.</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ch1/p1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Матрицы" href="p2.html" />
+    <link rel="prev" title="Векторы. Операции с векторами. Матрицы." href="main.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Линейная Алгебра. Конспект c питоном. - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Линейная Алгебра. Конспект c питоном. - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="main.html">Векторы. Операции с векторами. Матрицы.</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Вектор</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p2.html">Матрицы</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch2/main.html">Решение линейных уравнений</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ch2/p1.html">Системы линейных уравнений</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch2/p2.html">Элиминация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch2/p3.html">Правила обращения с матрицами</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch2/p4.html">Транспонирование</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch2/p5.html">Обратная матрица</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ch1/p1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Вектор</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Линейная комбинация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Внутреннее произведение или скалярное произведение</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Вектор<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Поскольку существует множество способов представления векторов, изначально Стрэнг использует вектор-строки и вектор-столбцы. Вообще, векторы необязательно представлять в виде наборов координат - они могут существовать и вне координатной системы. Важно понимать, что вектор - это объект, который можно определить независимо от координатной системы. Он описывается своими свойствами и сохраняет свои инварианты, такие как длина, а представление в виде набора координат — это лишь один из способов его записи.</p>
+<p>Вот так вот можно задать вектор в 2-х менрном пространстве (на плосткости):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{v} =
+\begin{bmatrix}
+v_1 \\
+v_2
+\end{bmatrix}
+\quad
+\begin{aligned}
+v_1 &amp;= \text{первый компонент } \boldsymbol{v} \\
+v_2 &amp;= \text{второй компонент } \boldsymbol{v}
+\end{aligned}
+\end{split}\]</div>
+<p>Вот как можно записать <span class="math notranslate nohighlight">\(n\)</span>-мерный вектор:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{v} =
+\begin{bmatrix}
+v_1 \\
+v_2 \\
+\vdots \\
+v_n
+\end{bmatrix}
+\quad
+\begin{aligned}
+v_1 &amp;= \text{первая компонента } \boldsymbol{v}, \\
+v_2 &amp;= \text{вторая компонента } \boldsymbol{v}, \\
+\vdots \\
+v_n &amp;= \text{последняя (}n\text{-я) компонента } \boldsymbol{v}.
+\end{aligned}
+\end{split}\]</div>
+<p>Здесь:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(v_1, v_2, \dots, v_n\)</span> — координаты <span class="math notranslate nohighlight">\(n\)</span>-мерного вектора,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vdots\)</span> используется для обозначения “и так далее”.</p></li>
+</ul>
+<p>Такой формат записи подчеркивает, что вектор может содержать любое количество компонентов <span class="math notranslate nohighlight">\(n\)</span>, каждая из которых соответствует определённой координате в пространстве.</p>
+<p>И тут можно сразу ввести те самые операции, которые делают вектор вектором:</p>
+<ol class="arabic">
+<li><p><strong>Сложение двух векторов.</strong> Это такая операция, в результате которой получается ещё один вектор.<br />
+Для вектор-столбцов эта операция выглядит так:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \boldsymbol{v} + \boldsymbol{w} = 
+   \begin{bmatrix} 
+   v_1 \\
+   v_2
+   \end{bmatrix}
+   +
+   \begin{bmatrix} 
+   w_1 \\
+   w_2
+   \end{bmatrix}
+   =
+   \begin{bmatrix} 
+   v_1 + w_1\\
+   v_2 + w_2
+   \end{bmatrix}
+   \end{split}\]</div>
+</li>
+<li><p><strong>Умножение вектора на скаляр</strong> (скаляр — это одномерный вектор или, попросту, число):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   c \boldsymbol{v} = 
+   c
+   \begin{bmatrix} 
+   v_1 \\
+   v_2
+   \end{bmatrix}
+   =
+   \begin{bmatrix} 
+   c v_1 \\
+   c v_2
+   \end{bmatrix}
+   \end{split}\]</div>
+</li>
+</ol>
+<p>Обязательно в результате этих операций должны получаются так-же вектора, а не другие объекты.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Вектора в numpy, как и остальные объекты линейного пространства, задаются как таблицы координат.</span>
+<span class="sd">Они представлены в виде одномерных массивов (numpy arrays), где каждая координата соответствует</span>
+<span class="sd">определённой компоненте вектора. В NumPy легко выполнять операции сложения, вычитания, а также </span>
+<span class="sd">умножения вектора на скаляр.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Определяем два вектора v и w</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор v:&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор w:&quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+<span class="c1"># Сложение двух векторов</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор v + w:&quot;</span><span class="p">,</span> <span class="n">v</span> <span class="o">+</span> <span class="n">w</span><span class="p">)</span>
+
+<span class="c1"># Умножение вектора на скаляр</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор 4w:&quot;</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">w</span><span class="p">)</span>
+
+<span class="c1"># Разность векторов</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Разность векторов v - w:&quot;</span><span class="p">,</span> <span class="n">v</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Вектор v: [1 2 3 4]
+Вектор w: [1 1 1 1]
+Вектор v + w: [2 3 4 5]
+Вектор 4w: [4 4 4 4]
+Разность векторов v - w: [0 1 2 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Если сложить вектор с самим собой, умноженным на минус единицу, то получим специальный вектор - <strong>нулевой вектор</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{v} - \boldsymbol{v} = 
+   \begin{bmatrix} 
+   v_1 \\
+   v_2
+   \end{bmatrix}
+   -
+   \begin{bmatrix} 
+   v_1 \\
+   v_2
+   \end{bmatrix}
+   =
+   \boldsymbol{0}
+\end{split}\]</div>
+<p>Вектор столбец можно записать и в строку например:
+$<span class="math notranslate nohighlight">\(
+\boldsymbol{v} =
+\begin{bmatrix}
+v_1 \\
+v_2
+\end{bmatrix} =
+\left( v_1, v_2 \right) \neq
+\begin{bmatrix}
+v_1 &amp; v_2
+\end{bmatrix}.
+\)</span>$
+При этом стоит заметить, что вектор-строка это другой объект, не идентичный вектор-столбцу, различая должны проясниться в следующих главах. Горизонтальная запись вектор-столбца удобна в некоторых случаях.</p>
+<section id="id2">
+<h2>Линейная комбинация<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><strong>Линейной комбинацией</strong> двух векторов называется выражение вида:</p>
+<div class="math notranslate nohighlight">
+\[
+c \boldsymbol{v} + d \boldsymbol{w}
+\]</div>
+<p>Например, для векторов из трёхмерного пространства линейная комбинация выглядит так:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+c \boldsymbol{v} + d \boldsymbol{w} = 
+   c \begin{bmatrix} 
+   v_1 \\
+   v_2 \\
+   v_3
+   \end{bmatrix}
+   +
+   d \begin{bmatrix} 
+   w_1 \\
+   w_2 \\
+   w_3
+   \end{bmatrix} =
+   \begin{bmatrix} 
+   c v_1 \\
+   c v_2 \\
+   c v_3
+   \end{bmatrix}
+   +
+   \begin{bmatrix} 
+   d w_1 \\
+   d w_2 \\
+   d w_3
+   \end{bmatrix}
+   =
+   \begin{bmatrix} 
+   c v_1 + d w_1 \\
+   c v_2 + d w_2 \\
+   c v_3 + d w_3
+   \end{bmatrix}
+\end{split}\]</div>
+<p>Линейная комбинация может быть определена для любого числа векторов из одного линейного пространства. Вот пример линейной комбинации 4-х векторов в трёхмерном пространстве:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}   5 \begin{bmatrix} 
+   1 \\
+   2 \\
+   3
+   \end{bmatrix}
+   +
+   4 \begin{bmatrix} 
+   1 \\
+   0 \\
+   1
+   \end{bmatrix}
+   +
+   (-2) \begin{bmatrix} 
+   2 \\
+   1 \\
+   0
+   \end{bmatrix}
+   +
+   1 \begin{bmatrix} 
+   1 \\
+   1 \\
+   1
+   \end{bmatrix}
+   =
+   \begin{bmatrix} 
+   5 \cdot 1 +  4 \cdot 1 - 2 \cdot 2 + 1 \cdot 1\\
+   5 \cdot 2 +  4 \cdot 0 - 2 \cdot 1 + 1 \cdot 1\\
+   5 \cdot 3 +  4 \cdot 1 - 2 \cdot 0 + 1 \cdot 1
+   \end{bmatrix}
+   =
+   \begin{bmatrix} 
+   6\\
+   9\\
+   20
+   \end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># vectors definition</span>
+<span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Coefficients of linear combination</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">linear_combination</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">v2</span>
+
+<span class="c1"># Calculation of new vector</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор v1:&quot;</span><span class="p">,</span> <span class="n">v1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор v2:&quot;</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Линейная комбинация: </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> * v1 + </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> * v2 = </span><span class="si">{</span><span class="n">linear_combination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;v1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;v2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">linear_combination</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">linear_combination</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> * v1 + </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> * v2&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Линейная комбинация векторов&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Вектор v1: [1 2]
+Вектор v2: [3 1]
+Линейная комбинация: 2 * v1 + -1 * v2 = [-1  3]
+</pre></div>
+</div>
+<img alt="../_images/2c2cb946fcd0715c29632d44950b82bf4f80a463964b3ada308382f5866d8678.png" src="../_images/2c2cb946fcd0715c29632d44950b82bf4f80a463964b3ada308382f5866d8678.png" />
+</div>
+</div>
+<p>Важные вопросы возникают, если перейти от одной комбинации, как в прошлом примере, ко всем комбинациям определённого вида.
+Как можно геометрически интерпретировать следующие линейные комбинации:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(c \boldsymbol{u};\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c \boldsymbol{u} + d \boldsymbol{v};\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c \boldsymbol{u} + d \boldsymbol{v} + e \boldsymbol{w}?\)</span></p></li>
+</ol>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_linear_combinations_3d</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="n">vector2</span><span class="p">,</span> <span class="n">vector3</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">range_val</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the linear combinations of two 3D vectors in 3D space.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        vector1 (numpy array): First 3D vector.</span>
+<span class="sd">        vector2 (numpy array): Second 3D vector.</span>
+<span class="sd">        vector3 (numpy array): Third 3D vector.</span>
+<span class="sd">        step (float): Step size for the coefficients.</span>
+<span class="sd">        range_val (float): Maximum absolute value of the coefficients.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Generate coefficients for the linear combinations</span>
+    <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">range_val</span><span class="p">,</span> <span class="n">range_val</span> <span class="o">+</span> <span class="n">step</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+    
+    <span class="c1"># Prepare a list to store all combinations</span>
+    <span class="n">combinations</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="p">:</span>
+                <span class="n">combination</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">vector1</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">vector2</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">vector3</span>
+                <span class="n">combinations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span>
+
+    <span class="n">combinations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">combinations</span><span class="p">)</span>
+    
+    <span class="c1"># Create a 3D plot</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Plot the linear combinations</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">combinations</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">combinations</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">combinations</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Линейные комбинации&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Plot the original vectors</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vector1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vector1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vector1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Вектор 1&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vector2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vector2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vector2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Вектор 2&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vector3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vector3</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vector3</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Вектор 3&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Add labels and legend</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X-axis&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y-axis&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Z-axis&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Линейные комбинации векторов&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Example usage:</span>
+<span class="n">vector1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">vector2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">vector3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plot_linear_combinations_3d</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">vector2</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">vector3</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">range_val</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_linear_combinations_3d</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="n">vector2</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">vector3</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">range_val</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot_linear_combinations_3d</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="n">vector2</span><span class="p">,</span> <span class="n">vector3</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">range_val</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/58a84537380def3c64d2809ca4f94be9f11bf50bf4dcd27a59339c49b5c372a9.png" src="../_images/58a84537380def3c64d2809ca4f94be9f11bf50bf4dcd27a59339c49b5c372a9.png" />
+<img alt="../_images/d631d281cd7435c7e520251266db7c5adbb7d1fc42dbf149337cdbcf68514ed3.png" src="../_images/d631d281cd7435c7e520251266db7c5adbb7d1fc42dbf149337cdbcf68514ed3.png" />
+<img alt="../_images/b7b00235ea6037061794e8998f05b309a4b7e5bddbd18dd15a25fb81903b4225.png" src="../_images/b7b00235ea6037061794e8998f05b309a4b7e5bddbd18dd15a25fb81903b4225.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h2>Внутреннее произведение или скалярное произведение<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>Могут ли взаимодействовать два вектора таким образом, чтобы в результате получался объект, отличный от вектора?<br />
+Внутреннее произведение двух элементов линейного пространства определяется рядом аксиом. Стрэнг вводит внутреннее произведение через координаты и отождествляет его со скалярным произведением. Для плоских вещественных пространств это действительно так, поэтому внутреннее произведение двумерных векторов можно найти следующим образом:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{v} = \left(v_1, v_2 \right),  \boldsymbol{w} = \left(w_1, w_2 \right) \quad  \\
+\boldsymbol{v} \cdot \boldsymbol{w} = v_1 w_1 + v_2 w_2 \quad
+\end{split}\]</div>
+<p>Например, внутреннее произведение вектор-столбцов (здесь я использую запись в строку с круглыми скобками):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{v} = \left(1, 3 \right),  \boldsymbol{w} = \left(2, 2\right) \quad  \\
+\boldsymbol{v} \cdot \boldsymbol{w} = 1 \cdot 2 + 3 \cdot 2 = 8
+\end{split}\]</div>
+<p>Если векторное пространство задано над полем действительных чисел (то есть координаты векторов — действительные числа), то произведение <span class="math notranslate nohighlight">\( \boldsymbol{v} \cdot \boldsymbol{w} = \boldsymbol{w} \cdot \boldsymbol{v} \)</span>. Поэтому для действительных векторов далее будет использован термин “скалярное произведение”. Если же координаты векторов — комплексные числа, то формула будет несколько иной.</p>
+<p>В общем виде формула для вычисления скалярного произведения двух векторов из N-мерного пространства:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{w} \cdot \boldsymbol{v} = \sum_{i = 1}^{N} w_i v_i
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Скалярное произведение векторов для объектов типа ndarray в numpy определяется через функцию np.dot .</span>
+<span class="sd">Так же может задаваься оператором @ ;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Определяем два вектора</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Скалярное произведение</span>
+<span class="n">dot_product</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="c1"># Или</span>
+<span class="n">dot_product</span> <span class="o">=</span> <span class="n">v</span> <span class="o">@</span> <span class="n">w</span>
+
+<span class="c1"># Вывод результатов</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор v:&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор w:&quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Скалярное произведение v • w:&quot;</span><span class="p">,</span> <span class="n">dot_product</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Вектор v: [1 3]
+Вектор w: [2 2]
+Скалярное произведение v • w: 8
+</pre></div>
+</div>
+</div>
+</div>
+<p>Можно геометрически проинтерпретировать следующее наблюдение: существуют такие ненулевые векторы, скалярное произведение которых равно нулю. Например:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{v} \cdot \boldsymbol{w} = \begin{bmatrix} 
+   4 \\
+   6
+   \end{bmatrix} \cdot
+   \begin{bmatrix} 
+   3 \\
+   -2
+   \end{bmatrix} = 4 \cdot 3 + 6 \cdot (-2) = 0.
+\end{split}\]</div>
+<p>Можно сказать, что такие векторы перпендикулярны в случае двух измерений или ортогональны в общем случае.  Можно геометрически проинтерпретировать следующее наблюдение: существуют такие ненулевые векторы, скалярное произведение которых равно нулю. Например:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{v} \cdot \boldsymbol{w} = \begin{bmatrix} 
+   4 \\
+   6
+   \end{bmatrix} \cdot
+   \begin{bmatrix} 
+   3 \\
+   -2
+   \end{bmatrix} = 4 \cdot 3 + 6 \cdot (-2) = 0.
+\end{split}\]</div>
+<p>Можно сказать, что такие векторы перпендикулярны в случае двух измерений или ортогональны в общем случае.</p>
+<p>С другой стороны, если ненулевой вектор умножить на самого себя, то получится число, большее нуля. По аналогии с числами можно сказать, что результат — это квадрат вектора. А так как результат — это число, его можно интерпретировать как квадрат длины вектора. Тогда можно дать определение длины вектора:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Длина} = \lVert \boldsymbol{v} \rVert = \sqrt{\boldsymbol{v} \cdot \boldsymbol{v}} = \sqrt{\sum_{i = 1}^{N} v_i^2}.
+\]</div>
+<p>С другой стороны, если ненулевой вектор умножить на самого себя, то получится число, большее нуля. По аналогии с числами можно сказать, что результат — это квадрат вектора. А так как результат — это число, его можно интерпретировать как квадрат длины вектора. Тогда можно дать определение длины вектора:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Длина} = \lVert \boldsymbol{v} \rVert = \sqrt{\boldsymbol{v} \cdot \boldsymbol{v}} = \sqrt{\sum_{i = 1}^{N} v_i^2}.
+\]</div>
+<p>Можно геометрически проинтерпретировать следующее наблюдение: существуют такие ненулевые векторы, скалярное произведение которых равно нулю. Например:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{v} \cdot \boldsymbol{w} = \begin{bmatrix} 
+   4 \\
+   6
+   \end{bmatrix} \cdot
+   \begin{bmatrix} 
+   3 \\
+   -2
+   \end{bmatrix} = 4 \cdot 3 + 6 \cdot (-2) = 0.
+\end{split}\]</div>
+<p>Можно сказать, что такие векторы перпендикулярны в случае двух измерений или ортогональны в общем случае.</p>
+<p>С другой стороны, если ненулевой вектор умножить на самого себя, то получится число, большее нуля. По аналогии с числами можно сказать, что результат — это квадрат вектора. А так как результат — это число, его можно интерпретировать как квадрат длины вектора. Тогда можно дать определение длины вектора:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Длина} = \lVert \boldsymbol{v} \rVert = \sqrt{\boldsymbol{v} \cdot \boldsymbol{v}} = \sqrt{\sum_{i = 1}^{N} v_i^2}.
+\]</div>
+<p>Если вектор представить как сумму следующего вида:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 
+   v_1 \\
+   v_2 \\
+   v_3
+\end{bmatrix} = 
+\begin{bmatrix} 
+   v_1 \\
+   0 \\
+   0
+\end{bmatrix} +
+\begin{bmatrix} 
+   0 \\
+   v_2 \\
+   0
+\end{bmatrix} +
+\begin{bmatrix} 
+   0 \\
+   0 \\
+   v_3
+\end{bmatrix},
+\end{split}\]</div>
+<p>то длина вектора — это просто теорема Пифагора.</p>
+<div class="cell tag_hide-input&quot; tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Демонстрация, что скалярное произведение может быть равно нулю ---</span>
+<span class="c1"># Определим векторы v и w в 2D, у которых dot(v, w) = 0</span>
+<span class="n">v_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">w_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">dot_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v_2d</span><span class="p">,</span> <span class="n">w_2d</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор v_2d:&quot;</span><span class="p">,</span> <span class="n">v_2d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Вектор w_2d:&quot;</span><span class="p">,</span> <span class="n">w_2d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Скалярное произведение v_2d • w_2d =&quot;</span><span class="p">,</span> <span class="n">dot_2d</span><span class="p">)</span>
+
+<span class="c1"># Проверка, являются ли векторы ортогональными</span>
+<span class="k">if</span> <span class="n">dot_2d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Векторы v_2d и w_2d ортогональны (перпендикулярны) в 2D.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Векторы не ортогональны.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Визуализация ортогональных векторов в 2D</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v_2d</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v_2d</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w_2d</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">w_2d</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Два ортогональных (перпендикулярных) вектора в 2D&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Вектор v_2d: [4 6]
+Вектор w_2d: [ 3 -2]
+Скалярное произведение v_2d • w_2d = 0
+Векторы v_2d и w_2d ортогональны (перпендикулярны) в 2D.
+</pre></div>
+</div>
+<img alt="../_images/fcb985d5bc0650baf387c3b13c592039a4e7dd19d9573af32cd8e9289821f3c3.png" src="../_images/fcb985d5bc0650baf387c3b13c592039a4e7dd19d9573af32cd8e9289821f3c3.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_vector_length</span><span class="p">(</span><span class="n">vector</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the geometric interpretation of a vector&#39;s length in 3D space.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        vector (numpy array): The vector to visualize.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">vector</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> 
+              <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> 
+              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Вектор </span><span class="si">{</span><span class="n">vector</span><span class="si">}</span><span class="s1">,</span><span class="se">\n</span><span class="s1"> Длинна = √</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">length</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mf">0.2</span><span class="o">/</span><span class="n">length</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Проекция на X&#39;</span><span class="p">,</span> <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mf">0.2</span><span class="o">/</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Проекция на Y&#39;</span><span class="p">,</span> <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mf">0.2</span><span class="o">/</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Проекция на Z&#39;</span><span class="p">,</span> <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mf">0.2</span><span class="o">/</span><span class="n">z</span><span class="p">)</span>
+
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Длинна вектора как теорема Пифагора&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="p">])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+<span class="n">vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">plot_vector_length</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/b8156b5a7c3d2fd8121cddd1926528ae748023802c04fdbf4eb3a12906047753.png" src="../_images/b8156b5a7c3d2fd8121cddd1926528ae748023802c04fdbf4eb3a12906047753.png" />
+</div>
+</div>
+<p>Вектор с длиной, равной 1, называется <strong>единичным вектором</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\lVert \boldsymbol{u} \rVert= 1.
+\]</div>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span> — единичный вектор.</p>
+<p>Для каждого вектора, кроме нулевого, можно построить единичный вектор, который направлен в ту же сторону, что и сам вектор:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{u} = \frac{\boldsymbol{v}}{\lVert \boldsymbol{v} \rVert}.
+\]</div>
+<p>Доказательство, что длина такого вектора равна 1:</p>
+<div class="math notranslate nohighlight">
+\[
+\lVert \boldsymbol{u} \rVert^2 = \frac{v_1^2}{\lVert \boldsymbol{v} \rVert^2} + \frac{v_2^2}{\lVert \boldsymbol{v}\rVert^2} + \frac{v_3^2}{\lVert \boldsymbol{v}\rVert^2} + \dots = 
+\frac{v_1^2 + v_2^2 + v_3^2 + \dots}{\lVert \boldsymbol{v} \rVert^2} = \frac{\lVert\boldsymbol{v}\rVert^2}{\lVert\boldsymbol{v}\rVert^2} = 1.
+\]</div>
+<p>Угол между векторами можно определить как угол между единичными векторами направленными в том же направлении, что и исходные вектора.
+Ниже я построил зависимость скалярного произведения, от угла между единичными векторами. Получившаяся зависимость подозрительно похожа косинус.</p>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncAnimation</span><span class="p">,</span> <span class="n">PillowWriter</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_2d_rotating_vector_and_scalar_product_gif</span><span class="p">(</span><span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;rotating_vectors_2d.gif&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a GIF showing two 2D unit vectors where one rotates, </span>
+<span class="sd">    and plots the scalar product as a function of the angle.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        save_path (str): Path to save the generated GIF.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Функция поворота 2D-вектора против часовой стрелки на заданный угол</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rotate_vector_2d</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rotates a 2D vector counterclockwise by a given angle.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            vector (np.array): 2D vector to rotate.</span>
+<span class="sd">            angle (float): Angle in radians.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.array: Rotated 2D vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+            <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)],</span>
+            <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span>  <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)]</span>
+        <span class="p">])</span>
+        <span class="k">return</span> <span class="n">rotation_matrix</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+
+    <span class="c1"># Задаём первый вектор (фиксированный), направленный вдоль оси X</span>
+    <span class="n">vector1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  
+
+    <span class="c1"># Второй вектор, который будет вращаться</span>
+    <span class="n">vector2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># Изначально совпадает с vector1</span>
+
+    <span class="c1"># Диапазон углов (от 0 до 4π), что соответствует 0–720 градусам</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="c1"># Предварительно вычисляем скалярные произведения для построения графика</span>
+    <span class="n">scalar_products</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="n">rotate_vector_2d</span><span class="p">(</span><span class="n">vector2</span><span class="p">,</span> <span class="n">angle</span><span class="p">))</span> <span class="k">for</span> <span class="n">angle</span> <span class="ow">in</span> <span class="n">angles</span><span class="p">]</span>
+
+    <span class="c1"># Создаём фигуру и два подграфика</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_vector</span><span class="p">,</span> <span class="n">ax_scalar</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+    <span class="c1"># Инициализируем подграфик для 2D-векторов</span>
+    <span class="n">fixed_vector_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax_vector</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">vector1</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">vector1</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                                        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Фиксированный вектор&quot;</span><span class="p">)</span>
+    <span class="n">rotating_vector_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax_vector</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">vector2</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">vector2</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                                           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Вращающийся вектор&quot;</span><span class="p">)</span>
+    <span class="n">ax_vector</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ax_vector</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ax_vector</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax_vector</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax_vector</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax_vector</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">)</span>
+    <span class="n">ax_vector</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;2D Векторы&quot;</span><span class="p">)</span>
+    <span class="n">ax_vector</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="c1"># Инициализируем подграфик для скалярного произведения</span>
+    <span class="n">ax_scalar</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">720</span><span class="p">)</span>  <span class="c1"># угол в градусах</span>
+    <span class="n">ax_scalar</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">ax_scalar</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Угол (в градусах)&quot;</span><span class="p">)</span>
+    <span class="n">ax_scalar</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Скалярное произведение&quot;</span><span class="p">)</span>
+    <span class="n">ax_scalar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Скалярное произведение в зависимости от угла&quot;</span><span class="p">)</span>
+    <span class="n">scalar_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax_scalar</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Скалярное произведение&quot;</span><span class="p">)</span>
+    <span class="n">ax_scalar</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="c1"># Функция обновления анимации для каждого кадра</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">angles</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
+        <span class="n">rotated_vector</span> <span class="o">=</span> <span class="n">rotate_vector_2d</span><span class="p">(</span><span class="n">vector2</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+        <span class="c1"># Обновляем положение вращающегося вектора</span>
+        <span class="n">rotating_vector_plot</span><span class="o">.</span><span class="n">set_data</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">rotated_vector</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">rotated_vector</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+        <span class="c1"># Обновляем график скалярного произведения</span>
+        <span class="n">scalar_plot</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">angles</span><span class="p">[:</span><span class="n">frame</span><span class="p">]),</span> <span class="n">scalar_products</span><span class="p">[:</span><span class="n">frame</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">rotating_vector_plot</span><span class="p">,</span> <span class="n">scalar_plot</span>
+
+    <span class="c1"># Создаём анимацию</span>
+    <span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">angles</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Сохраняем анимацию в формате GIF</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">PillowWriter</span><span class="p">(</span><span class="n">fps</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="n">writer</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GIF сохранён в </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">plot_2d_rotating_vector_and_scalar_product_gif</span><span class="p">(</span><span class="s2">&quot;rotating_vectors_2d.gif&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GIF сохранён в rotating_vectors_2d.gif
+</pre></div>
+</div>
+<img alt="../_images/9ea75195dad9b5065c15a49503ff4f0e032ad2b404bbbe8d183a6ce4e9d3f2f7.png" src="../_images/9ea75195dad9b5065c15a49503ff4f0e032ad2b404bbbe8d183a6ce4e9d3f2f7.png" />
+</div>
+</details>
+</div>
+<p><img alt="SegmentLocal" src="../_images/rotating_vectors_2d.gif" /></p>
+<p>Можно заметить, что скалярное произведение между единичными векторами равно косинусу угла между ними:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\lVert\boldsymbol{v}\rVert = 1, \\
+\lVert\boldsymbol{w}\rVert = 1, \\
+\text{угол между вектором } \boldsymbol{v} \text{ и } \boldsymbol{w} = \theta,\\
+\boldsymbol{v} \cdot \boldsymbol{w} = \cos(\theta).
+\end{split}\]</div>
+<p>Если же векторы не единичные, то можно разделить каждый из них на его модуль, тогда выражение для косинуса угла между векторами примет вид:</p>
+<div class="math notranslate nohighlight">
+\[
+\cos(\theta) = \frac{\boldsymbol{v} \cdot \boldsymbol{w}}{\lVert\boldsymbol{v}\rVert \cdot \lVert\boldsymbol{w}\rVert}.
+\]</div>
+<p>Из последней формулы очевидным образом выводятся два важных неравенства.<br />
+<strong>Неравенство Шварца</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+|\boldsymbol{v} \cdot \boldsymbol{w}| \leq \lVert\boldsymbol{v}\rVert \cdot \lVert\boldsymbol{w}\rVert
+\]</div>
+<p><strong>Неравенство треугольника</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\lVert\boldsymbol{v} + \boldsymbol{w}\rVert \leq \lVert\boldsymbol{v}\rVert + \lVert\boldsymbol{w}\rVert
+\]</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ch1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="main.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Векторы. Операции с векторами. Матрицы.</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="p2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Матрицы</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Линейная комбинация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Внутреннее произведение или скалярное произведение</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anton Demin
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

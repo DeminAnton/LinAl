@@ -1,0 +1,799 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Правила обращения с матрицами &#8212; Линейная Алгебра. Конспект c питоном.</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ch2/p3';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Транспонирование" href="p4.html" />
+    <link rel="prev" title="Элиминация" href="p2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Линейная Алгебра. Конспект c питоном. - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Линейная Алгебра. Конспект c питоном. - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ch1/main.html">Векторы. Операции с векторами. Матрицы.</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ch1/p1.html">Вектор</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ch1/p2.html">Матрицы</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="main.html">Решение линейных уравнений</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p1.html">Системы линейных уравнений</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p2.html">Элиминация</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Правила обращения с матрицами</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p4.html">Транспонирование</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p5.html">Обратная матрица</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ch2/p3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Правила обращения с матрицами</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Сложение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Умножение на число</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Умножение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Матричные операции подчиняются следующим законам:</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Правила обращения с матрицами<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Работа с матрицами — это расширение работы с векторами, поскольку матрицы можно рассматривать как набор “упакованных” векторов. Операции с матрицами основываются на тех же принципах, что и для векторов, но включают дополнительные правила. Ниже описаны основные операции с матрицами.</p>
+<section id="id2">
+<h2>Сложение<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>Со сложением всё просто:<br />
+Мы складываем соответствующие элементы, как и в векторах.</p>
+</section>
+<section id="id3">
+<h2>Умножение на число<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>Здесь всё также аналогично векторному случаю:<br />
+Каждый элемент матрицы умножается на число.</p>
+</section>
+<section id="id4">
+<h2>Умножение<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Поскольку матрицу можно представить как набор вектор-столбцов, умножение матриц можно рассматривать следующим образом:</p>
+<div class="math notranslate nohighlight">
+\[
+   \mathbf{A B} = \mathbf{A} \cdot \left[ \begin{array}{} \mathbf{b_1} &amp; \mathbf{b_2} &amp; \mathbf{b_3} \end{array} \right] = \left[\begin{array}{} \mathbf{A} \cdot \mathbf{b_1} &amp; \mathbf{A} \cdot \mathbf{b_2} &amp; \mathbf{A} \cdot \mathbf{b_3} \end{array}  \right]
+   \]</div>
+<p>Матрица <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> действует на каждый вектор-столбец матрицы <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>.</p>
+</li>
+</ol>
+<p>Если развить этот подход и представить матрицу <span class="math notranslate nohighlight">\(\mathbf{A} \)</span> как совокупность вектор-строк, то получится следующее:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \mathbf{A} \cdot \mathbf{b_1} = 
+   \begin{bmatrix}
+   a_1 \\
+   a_2 \\
+   a_3 
+   \end{bmatrix} 
+   \begin{bmatrix}
+   b_1 &amp;  b_2 &amp;  b_3 
+   \end{bmatrix} 
+   \end{split}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Отсюда следует, что чтобы получить элемент результирующей матрицы <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>, нужно соответствующую строку <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> умножить на соответствующий столбец <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+   c_{ij} = \text{i-ая строка} \thinspace \mathbf{A} \cdot \text{j-ый столбец} \thinspace \mathbf{B}.
+   \]</div>
+<p>Из этого правила следует, что матрицы должны быть согласованы по размеру. У матрицы <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> количество элементов в строке (количество столбцов) должно быть равно количеству элементов в столбце матрицы <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> (количество строк). Это правило можно записать так:</p>
+<div class="math notranslate nohighlight">
+\[
+   \mathbf{A}_{m \times n} \mathbf{B}_{n \times q} = \mathbf{C}_{m \times q},
+   \]</div>
+<p>где первый индекс — это количество строк, а второй — количество столбцов.</p>
+<p>Зная два три способа, можно получить ещё пару представлений:</p>
+<ol class="arabic" start="3">
+<li><p><span class="math notranslate nohighlight">\(i\)</span>-ая строка <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> умножается матрично на <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, и получается <span class="math notranslate nohighlight">\(i\)</span>-ая строка матрицы <span class="math notranslate nohighlight">\(\mathbf{AB}\)</span>.</p></li>
+<li><p>Если поступить наоборот и представить матрицу <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> как совокупность вектор-столбцов, а матрицу <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> как совокупность вектор-строк, то, умножив соответствующие столбцы на строки, получим:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+   \begin{bmatrix}
+   \text{колонка}_1 &amp;  \text{колонка}_2 &amp;  \text{колонка}_3 
+   \end{bmatrix} \\\begin{split}   \begin{bmatrix}
+   \text{строка}_1 \\
+   \text{строка}_2 \\
+   \text{строка}_3 
+   \end{bmatrix} =
+   \text{колонка}_1 \cdot \text{строка}_1 + 
+   \text{колонка}_2 \cdot \text{строка}_2 + 
+   \text{колонка}_3 \cdot \text{строка}_3,
+   \end{split}\end{aligned}\end{align} \]</div>
+<p>где каждое слагаемое будет матрицей.</p>
+</li>
+</ol>
+<p>В python numpy из коробки умеет умножать матрицы при помощи знакомого оператора ‘&#64;’ или np.dot(). Код ниже продемонстритует, что первый способ умножения дает тот, же результат, что и третий (который чаще всего дается при изучении линейной алгебры).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">split_array</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rows&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Splits a NumPy ndarray into a list of vector-columns or vector-rows.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array : ndarray</span>
+<span class="sd">        A 2D NumPy array to be split.</span>
+<span class="sd">    format : str, optional</span>
+<span class="sd">        Specifies the format of the returned vectors. </span>
+<span class="sd">        - &quot;rows&quot;: returns a list of vector-rows (default).</span>
+<span class="sd">        - &quot;columns&quot;: returns a list of vector-columns.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list of 1D NumPy arrays (vector-rows or vector-columns).</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If `format` is not &quot;rows&quot; or &quot;columns&quot;.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; array = np.array([[1, 2, 3], [4, 5, 6]])</span>
+<span class="sd">    &gt;&gt;&gt; split_array(array, format=&quot;rows&quot;)</span>
+<span class="sd">    [array([1, 2, 3]), array([4, 5, 6])]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; split_array(array, format=&quot;columns&quot;)</span>
+<span class="sd">    [array([1, 4]), array([2, 5]), array([3, 6])]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;rows&quot;</span><span class="p">,</span> <span class="s2">&quot;columns&quot;</span><span class="p">}:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid format. Use &quot;rows&quot; or &quot;columns&quot;.&#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s2">&quot;rows&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+    <span class="k">elif</span> <span class="nb">format</span> <span class="o">==</span> <span class="s2">&quot;columns&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">array</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mat_mul_as_linear_combination</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">log</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform matrix multiplication and interpret it as a linear combination of column vectors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : ndarray</span>
+<span class="sd">        A 2D NumPy array (matrix) of shape (m, n).</span>
+<span class="sd">    B : ndarray</span>
+<span class="sd">        A 2D NumPy array (matrix) of shape (n, p).</span>
+<span class="sd">    log : bool, optional</span>
+<span class="sd">        If True, prints the detailed step-by-step process of interpreting the multiplication </span>
+<span class="sd">        as a linear combination of column vectors from `A` with the weights provided by </span>
+<span class="sd">        the columns of `B`. Default is True.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray</span>
+<span class="sd">        The result of matrix multiplication, a 2D NumPy array of shape (m, p).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function not only performs the standard matrix multiplication $ C = A \times B $, </span>
+<span class="sd">    but also provides an interpretation of the multiplication:</span>
+<span class="sd">    - The result can be thought of as forming each column of the resulting matrix $ C $</span>
+<span class="sd">      by taking a linear combination of the columns of `A`, where the coefficients of the </span>
+<span class="sd">      combination are the entries of the corresponding column in `B`.</span>
+<span class="sd">    - The function prints intermediate steps of this process if `log=True`.</span>
+
+<span class="sd">    The output includes:</span>
+<span class="sd">    - The initial multiplication process: `A * B` and the breakdown of `B` into its column vectors.</span>
+<span class="sd">    - The interpretation of each column of `B` as weights for a linear combination of columns of `A`.</span>
+<span class="sd">    - The resulting scaled columns before summation.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from some_module import mat_mul_as_linear_combination</span>
+<span class="sd">    &gt;&gt;&gt; A = np.array([[1, 2], [3, 4]])</span>
+<span class="sd">    &gt;&gt;&gt; B = np.array([[5, 6], [7, 8]])</span>
+<span class="sd">    &gt;&gt;&gt; result = mat_mul_as_linear_combination(A, B, log=True)</span>
+<span class="sd">    [[1 2]</span>
+<span class="sd">     [3 4]] * [[5 6]</span>
+<span class="sd">               [7 8]] =</span>
+<span class="sd">    [[5 7]] ;</span>
+<span class="sd">    [[6 8]] ;</span>
+<span class="sd">    =</span>
+<span class="sd">    5 * [[1]</span>
+<span class="sd">         [3]] + 7 * [[2]</span>
+<span class="sd">                    [4]] +</span>
+<span class="sd">    6 * [[1]</span>
+<span class="sd">         [3]] + 8 * [[2]</span>
+<span class="sd">                    [4]] ;</span>
+<span class="sd">    =</span>
+<span class="sd">    [[19 22]</span>
+<span class="sd">     [43 50]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    numpy.dot : Computes dot product of two arrays.</span>
+<span class="sd">    numpy.matmul : Matrix multiplication using the `@` operator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">B_columns</span> <span class="o">=</span> <span class="n">split_array</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">B_columns</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s1"> * </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">T</span><span class="si">}</span><span class="s1">.T ;&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+    <span class="n">A_columns</span> <span class="o">=</span> <span class="n">split_array</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">b_col</span> <span class="ow">in</span> <span class="n">B_columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">b_col</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1"> * </span><span class="si">{</span><span class="n">A_columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="si">}</span><span class="s1">.T  +&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">val</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span> <span class="k">else</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1"> * </span><span class="si">{</span><span class="n">A_columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="si">}</span><span class="s1">.T  ;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">b_col</span> <span class="ow">in</span> <span class="n">B_columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">b_col</span><span class="p">):</span>
+                <span class="n">cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">A_columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">val</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A_columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="si">}</span><span class="s1">.T  +&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">val</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span> <span class="k">else</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">val</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A_columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="si">}</span><span class="s1">.T  ;&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cols</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">:],</span> <span class="mi">0</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+    <span class="p">]</span>
+        <span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="p">]</span>
+        <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mat_mul_as_linear_combination</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[4 3 2]
+ [1 3 1]
+ [3 4 7]]
+*
+[[2 3 5]
+ [3 2 1]
+ [6 5 2]]
+=
+[[4 3 2]
+ [1 3 1]
+ [3 4 7]] * [2 3 6].T ;
+[[4 3 2]
+ [1 3 1]
+ [3 4 7]] * [3 2 5].T ;
+[[4 3 2]
+ [1 3 1]
+ [3 4 7]] * [5 1 2].T ;
+
+=
+2 * [4 1 3].T  + 3 * [3 3 4].T  + 6 * [2 1 7].T  ;
+3 * [4 1 3].T  + 2 * [3 3 4].T  + 5 * [2 1 7].T  ;
+5 * [4 1 3].T  + 1 * [3 3 4].T  + 2 * [2 1 7].T  ;
+=
+[8 2 6].T  + [ 9  9 12].T  + [12  6 42].T  ;
+[12  3  9].T  + [6 6 8].T  + [10  5 35].T  ;
+[20  5 15].T  + [3 3 4].T  + [ 4  2 14].T  ;
+[[29 28 27]
+ [17 14 10]
+ [60 52 33]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[29 28 27]
+ [17 14 10]
+ [60 52 33]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h2>Матричные операции подчиняются следующим законам:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A + B = B + A\)</span> — (коммутативный закон для сложения).</p></li>
+<li><p><span class="math notranslate nohighlight">\(c(A + B) = cA + cB\)</span> — (распределительный закон).</p></li>
+<li><p><span class="math notranslate nohighlight">\(A + (B + C) = (A + B) + C\)</span> — (ассоциативный закон для сложения).</p></li>
+</ul>
+<p>Три дополнительных закона справедливы для умножения, но <span class="math notranslate nohighlight">\(AB \neq BA\)</span> — не один из них:<br />
+(«коммутативный закон» для умножения обычно нарушается)</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A(B + C) = AB + AC\)</span> — (распределительный закон слева).</p></li>
+<li><p><span class="math notranslate nohighlight">\((A + B)C = AC + BC\)</span> — (распределительный закон справа).</p></li>
+<li><p><span class="math notranslate nohighlight">\(A(BC) = (AB)C\)</span> — (ассоциативный закон для произведения <span class="math notranslate nohighlight">\(ABC\)</span>; скобки не обязательны).</p></li>
+</ul>
+<p>Простой пример того, что <span class="math notranslate nohighlight">\(AB \neq BA\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;B =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AB =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">A</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;BA =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">B</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =
+ [[4 3 2]
+ [1 3 1]
+ [3 4 7]]
+B =
+ [[2 3 5]
+ [3 2 1]
+ [6 5 2]]
+AB =
+ [[29 28 27]
+ [17 14 10]
+ [60 52 33]]
+BA =
+ [[26 35 42]
+ [17 19 15]
+ [35 41 31]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ch2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="p2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Элиминация</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="p4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Транспонирование</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Сложение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Умножение на число</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Умножение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Матричные операции подчиняются следующим законам:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anton Demin
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
